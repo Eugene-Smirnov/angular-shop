@@ -27,7 +27,9 @@
   }
 
   &__more-contacts-item {
-    margin: 0.5rem 1rem;
+    height: auto;
+    line-height: initial;
+    padding: 0.5rem 0.75rem;
   }
 
   &__working-hours {

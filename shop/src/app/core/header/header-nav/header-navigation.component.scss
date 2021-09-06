@@ -1,0 +1,57 @@
+.logo {
+  font-family: 'Alfa Slab One', cursive;
+}
+
+.header-nav {
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 5%;
+  }
+
+  &__logo {
+    padding: 0.1rem 0.25rem;
+    margin: auto 0.5rem auto 0;
+
+    font-size: 19px;
+    color: white;
+    text-shadow: #616161 1px 1px 0;
+
+    background: rgb(63, 81, 181);
+    background: linear-gradient(
+      135deg,
+      rgba(63, 81, 181, 1) 0%,
+      rgba(195, 69, 145, 1) 75%,
+      rgba(255, 64, 129, 1) 100%
+    );
+  }
+
+  &__button {
+    margin: 0 0.5rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .mat-form-field-flex,
+  .mat-form-field-appearance-fill {
+    padding-top: 0;
+  }
+}
+
+.user-info {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  img {
+    margin: 1rem;
+  }
+}
+
+.search-form-field {
+  margin: 0 0.5rem;
+  flex-grow: 2;
+}

@@ -1,0 +1,25 @@
+<div class="header-nav__wrapper">
+  <h1 class="logo header-nav__logo">XXIIvek.by</h1>
+  <button class="header-nav__button" mat-stroked-button>Каталог товаров</button>
+  <mat-form-field class="search-form-field" appearance="fill">
+    <mat-label>{{ placeholder }}</mat-label>
+    <button matPrefix mat-icon-button aria-label="Search">🔎</button>
+    <input matInput type="text" [(ngModel)]="value" />
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
+      &#10006;
+    </button>
+  </mat-form-field>
+  <button class="header-nav__button" mat-stroked-button [matMenuTriggerFor]="menu">
+    Аккаунт &#9660;
+  </button>
+  <mat-menu #menu xPosition="before">
+    <div class="user-info">
+      <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
+      <button mat-raised-button color="primary">Вход</button>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>&#9825; Избранное</button>
+    <button mat-menu-item>&#19908; Лист ожидания</button>
+  </mat-menu>
+  <button class="header-nav__button" mat-stroked-button>🛒 Корзина</button>
+</div>
