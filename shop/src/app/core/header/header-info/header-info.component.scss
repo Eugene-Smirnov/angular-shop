@@ -1,0 +1,43 @@
+.header-info {
+  &__wrapper {
+    width: 90%;
+    margin: 0 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  display: flex;
+
+  &__location {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    align-items: center;
+    p,
+    button {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__more-contacts-item {
+    margin: 0.5rem 1rem;
+  }
+
+  &__working-hours {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    h6 {
+      margin: 0 0.5rem;
+    }
+  }
+}
