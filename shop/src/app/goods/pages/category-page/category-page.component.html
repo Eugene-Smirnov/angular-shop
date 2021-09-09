@@ -1,1 +1,5 @@
-<p>{{ category?.name }}</p>
+<app-breadcrumps
+  [breadcrumps]="breadcrumps"
+  (breadcrumpClick)="onBreadcrumpClick($event)"
+></app-breadcrumps>
+<h2>{{ category?.name }}</h2>

@@ -1,0 +1,16 @@
+.breadcrumps {
+  display: flex;
+  margin: 0.5rem 0;
+}
+
+.breadcrump {
+  &__wrapper {
+    display: flex;
+    cursor: default;
+    p {
+      margin-right: 0.5rem;
+    }
+  }
+
+  cursor: pointer;
+}
