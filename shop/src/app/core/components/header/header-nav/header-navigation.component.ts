@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header-navigation',
@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderNavigationComponent {
   value = '';
+
+  @Output() toCategories = new EventEmitter();
+
+  @Output() toMain = new EventEmitter();
 
   placeholder = 'Поиск товаров';
 }

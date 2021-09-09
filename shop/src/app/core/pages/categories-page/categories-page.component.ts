@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { from, Observable } from 'rxjs';
-import { debounceTime, find, map, switchMap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { getCategories } from 'src/app/redux/selectors/categories.selectors';
+import { CategoryModel } from '../../models/category.model';
 import { SubCategoryModel } from '../../models/subcategory.model';
-import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-categories-page',
@@ -13,40 +14,74 @@ import { CategoryService } from '../../services/category.service';
   styleUrls: ['./categories-page.component.scss'],
 })
 export class CategoriesPageComponent implements OnInit, OnDestroy {
-  constructor(private categoryService: CategoryService, private store: Store) {}
+  constructor(private router: Router, private store: Store) {}
 
-  activeCategoryControl = new FormControl();
-  activeCategory$: Observable<string> = this.activeCategoryControl.valueChanges.pipe(
-    debounceTime(200),
-    map((value) => value),
-  );
+  private subscriptions: Subscription = new Subscription();
+
+  activeCategoryControl = new FormControl('');
+
   categories$ = this.store.select(getCategories);
+
+  activeCategoryId$: Observable<string> = this.activeCategoryControl.valueChanges.pipe(
+    debounceTime(200),
+  );
+
+  activeCategory$: Observable<CategoryModel | undefined> = this.categories$.pipe(
+    switchMap((categories) =>
+      this.activeCategoryId$.pipe(
+        map((activeCategoryId) => {
+          const cat = categories.find((category) => activeCategoryId === category.id);
+          if (cat) return cat;
+          return;
+        }),
+      ),
+    ),
+  );
+
+  activeCategory: CategoryModel | undefined;
+
+  subCategories$: Observable<SubCategoryModel[]> = this.categories$.pipe(
+    switchMap((categories) =>
+      this.activeCategoryId$.pipe(
+        map((activeCategoryId) => {
+          const subCategories = categories.find(
+            (category) => activeCategoryId === category.id,
+          )?.subCategories;
+          if (subCategories) return subCategories;
+          return [];
+        }),
+      ),
+    ),
+  );
+
   subCategories: SubCategoryModel[] = [];
 
   ngOnInit() {
-    this.categories$.subscribe((categories) =>
-      this.activeCategoryControl.setValue(categories[0]?.id),
+    this.subscriptions.add(
+      this.activeCategory$.subscribe((activeCategory) => (this.activeCategory = activeCategory)),
     );
 
-    this.activeCategory$
-      .pipe(
-        switchMap((activeCategoryId) => {
-          return this.categories$.pipe(
-            map(
-              (categories) =>
-                categories.find((category) => activeCategoryId === category.id)?.subCategories,
-            ),
-          );
-        }),
-      )
-      .subscribe((subCategories) => {
-        if (subCategories) this.subCategories = subCategories;
-      });
+    this.subscriptions.add(
+      this.subCategories$.subscribe((subCategories) => (this.subCategories = subCategories)),
+    );
+
+    this.subscriptions.add(
+      this.categories$.subscribe((categories) =>
+        this.activeCategoryControl.setValue(categories[0]?.id),
+      ),
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   onCategoryHover(categoryId: string) {
     this.activeCategoryControl.setValue(categoryId);
   }
 
-  ngOnDestroy() {}
+  onCategoryClick(categoryId: string | undefined) {
+    if (!categoryId) return;
+    this.router.navigate([`/goods/${categoryId}`]);
+  }
 }

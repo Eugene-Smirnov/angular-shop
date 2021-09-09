@@ -8,9 +8,8 @@ const routes: Routes = [
     component: CategoriesPageComponent,
   },
   {
-    path: '',
-    redirectTo: '/categories',
-    pathMatch: 'full',
+    path: 'goods',
+    loadChildren: () => import('./goods/goods.module').then((m) => m.GoodsModule),
   },
 ];
 

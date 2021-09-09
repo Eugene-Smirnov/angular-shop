@@ -1,6 +1,13 @@
 <div class="header-nav__wrapper">
-  <h1 class="logo header-nav__logo">XXIIvek.by</h1>
-  <button class="header-nav__button" mat-stroked-button>Каталог товаров</button>
+  <h1 class="logo header-nav__logo" (click)="toMain.emit()">XXIIvek.by</h1>
+  <button
+    class="header-nav__button"
+    mat-stroked-button
+    (click)="toCategories.emit()"
+    routerLinkActive="active"
+  >
+    Каталог товаров
+  </button>
   <mat-form-field class="search-form-field" appearance="fill">
     <mat-label>{{ placeholder }}</mat-label>
     <button matPrefix mat-icon-button aria-label="Search">🔎</button>

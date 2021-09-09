@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-import { CoreRoutingModule } from './core-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderInfoComponent } from './components/header/header-info/header-info.component';
 import { HeaderNavigationComponent } from './components/header/header-nav/header-navigation.component';
@@ -43,7 +42,6 @@ import { LoadCategoriesEffect } from '../redux/effects/categories.effects';
       fromCategoriesReducer.youtubeApiReducer,
     ),
     EffectsModule.forFeature([LoadCategoriesEffect]),
-    CoreRoutingModule,
   ],
   providers: [CategoryService],
   exports: [HeaderComponent],
