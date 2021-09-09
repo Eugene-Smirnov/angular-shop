@@ -4,6 +4,10 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 
 const routes: Routes = [
   {
+    path: ':categoryId/:subCategoryId',
+    component: CategoryPageComponent,
+  },
+  {
     path: ':categoryId',
     component: CategoryPageComponent,
   },

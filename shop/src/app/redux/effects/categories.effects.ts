@@ -7,8 +7,8 @@ import { categoriesLoadedSuccess, loadCategories } from '../actions/categories.a
 
 @Injectable()
 export class LoadCategoriesEffect {
-  loadCategories$ = createEffect(() =>
-    this.actions$.pipe(
+  loadCategories$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(loadCategories),
       mergeMap(() =>
         this.categoryService.getAll().pipe(
@@ -16,8 +16,8 @@ export class LoadCategoriesEffect {
           catchError(() => EMPTY),
         ),
       ),
-    ),
-  );
+    );
+  });
 
   constructor(private actions$: Actions, private categoryService: CategoryService) {}
 }

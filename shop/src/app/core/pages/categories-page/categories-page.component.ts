@@ -84,4 +84,9 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     if (!categoryId) return;
     this.router.navigate([`/goods/${categoryId}`]);
   }
+
+  onSubCategoryClick(subCategoryId: string | undefined) {
+    if (!subCategoryId || !this.activeCategory) return;
+    this.router.navigate([`/goods/${this.activeCategory.id}/${subCategoryId}`]);
+  }
 }

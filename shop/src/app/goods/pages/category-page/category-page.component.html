@@ -2,4 +2,10 @@
   [breadcrumps]="breadcrumps"
   (breadcrumpClick)="onBreadcrumpClick($event)"
 ></app-breadcrumps>
-<h2>{{ category?.name }}</h2>
+<h2>{{ headingName }}</h2>
+<div class="card" *ngFor="let item of goods$ | async">
+  <h3>{{ item?.name }}</h3>
+</div>
+<button mat-raised-button *ngIf="isNotLastPage$ | async" color="accent" (click)="onMoreClick()">
+  Показать больше
+</button>

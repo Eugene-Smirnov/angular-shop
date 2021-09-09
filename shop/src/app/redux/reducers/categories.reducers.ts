@@ -8,7 +8,7 @@ export const initialState: CategoriesState = { categories: [] };
 
 export const youtubeApiReducer = createReducer(
   initialState,
-  on(loadCategories, (state): CategoriesState => {
+  on(loadCategories, (): CategoriesState => {
     return { ...initialState };
   }),
   on(categoriesLoadedSuccess, (state, { loadedCategories }): CategoriesState => {

@@ -5,9 +5,26 @@ import { GoodsRoutingModule } from './goods-routing.module';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { StoreModule } from '@ngrx/store';
 import { BreadcrumpsComponent } from './components/breadcrumps/breadcrumps.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
+import { GoodsService } from './services/goods.service';
+
+import * as fromGoodsReducer from '../redux/reducers/goods.reducer';
+import {
+  LoadCategoryGoodsEffect,
+  LoadSubCategoryGoodsEffect,
+} from '../redux/effects/goods.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [CategoryPageComponent, BreadcrumpsComponent],
-  imports: [CommonModule, GoodsRoutingModule, StoreModule],
+  declarations: [CategoryPageComponent, BreadcrumpsComponent, ItemCardComponent],
+  imports: [
+    CommonModule,
+    GoodsRoutingModule,
+    StoreModule.forFeature(fromGoodsReducer.goodsFeatureKey, fromGoodsReducer.goodsReducer),
+    EffectsModule.forFeature([LoadCategoryGoodsEffect, LoadSubCategoryGoodsEffect]),
+    MatButtonModule,
+  ],
+  providers: [GoodsService],
 })
 export class GoodsModule {}

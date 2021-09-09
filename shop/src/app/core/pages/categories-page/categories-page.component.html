@@ -19,7 +19,11 @@
         {{ activeCategory?.name }}
       </h2>
     </a>
-    <div *ngFor="let subCategory of subCategories" class="subcategories-list__li">
+    <div
+      *ngFor="let subCategory of subCategories"
+      class="subcategories-list__li"
+      (click)="onSubCategoryClick(subCategory.id)"
+    >
       {{ subCategory?.name }}
     </div>
   </div>
