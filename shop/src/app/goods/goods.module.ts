@@ -15,6 +15,7 @@ import {
 } from '../redux/effects/goods.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [GoodsListPageComponent, BreadcrumpsComponent, ItemCardComponent],
@@ -24,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     StoreModule.forFeature(fromGoodsReducer.goodsFeatureKey, fromGoodsReducer.goodsReducer),
     EffectsModule.forFeature([LoadCategoryGoodsEffect, LoadSubCategoryGoodsEffect]),
     MatButtonModule,
+    MatDividerModule,
   ],
   providers: [GoodsService],
 })

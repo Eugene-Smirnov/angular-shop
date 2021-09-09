@@ -6,6 +6,7 @@ import {
   addPage,
   loadCategoryGoods,
   loadSubCategoryGoods,
+  resetGoods,
 } from 'src/app/redux/actions/goods.actions';
 import { getCategories } from 'src/app/redux/selectors/categories.selectors';
 import { getGoodsByPage, getPage, isNotLastPage } from 'src/app/redux/selectors/goods.selector';
@@ -72,6 +73,7 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.store.dispatch(resetGoods());
   }
 
   onBreadcrumpClick(path: string): void {

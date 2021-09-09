@@ -6,6 +6,7 @@ export const GOODS_ACTION_NAMES = {
   LOAD_SUBCATEGORY_GOODS: '[GOODS] Load subcategory goods',
   GOODS_LOADED: '[GOODS] Goods loaded successfully',
   ADD_PAGE: '[GOODS] Increment page counter',
+  RESET: '[GOODS] Reset state',
 };
 
 export const loadCategoryGoods = createAction(
@@ -24,3 +25,5 @@ export const goodsLoadedSuccess = createAction(
 );
 
 export const addPage = createAction(GOODS_ACTION_NAMES.ADD_PAGE);
+
+export const resetGoods = createAction(GOODS_ACTION_NAMES.RESET);

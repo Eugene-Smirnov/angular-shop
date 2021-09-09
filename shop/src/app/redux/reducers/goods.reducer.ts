@@ -4,6 +4,7 @@ import {
   goodsLoadedSuccess,
   loadCategoryGoods,
   loadSubCategoryGoods,
+  resetGoods,
 } from '../actions/goods.actions';
 import { GoodsState } from '../models/state.models';
 
@@ -41,6 +42,11 @@ export const goodsReducer = createReducer(
     return {
       ...state,
       page: state.page + 1,
+    };
+  }),
+  on(resetGoods, (): GoodsState => {
+    return {
+      ...initialState,
     };
   }),
 );

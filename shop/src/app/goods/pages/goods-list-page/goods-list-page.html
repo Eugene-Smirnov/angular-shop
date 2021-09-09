@@ -4,7 +4,8 @@
 ></app-breadcrumps>
 <h2>{{ headingName }}</h2>
 <div class="card" *ngFor="let item of goods$ | async">
-  <h3>{{ item?.name }}</h3>
+  <mat-divider></mat-divider>
+  <app-item-card [item]="item"></app-item-card>
 </div>
 <button mat-raised-button *ngIf="isNotLastPage$ | async" color="accent" (click)="onMoreClick()">
   Показать больше
