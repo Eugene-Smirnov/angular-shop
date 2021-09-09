@@ -14,10 +14,10 @@ import { GoodsItemModel } from '../../models/goods-item.model';
 
 @Component({
   selector: 'app-category-page',
-  templateUrl: './category-page.component.html',
-  styleUrls: ['./category-page.component.scss'],
+  templateUrl: './goods-list-page.html',
+  styleUrls: ['./goods-list-page.scss'],
 })
-export class CategoryPageComponent implements OnInit, OnDestroy {
+export class GoodsListPageComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private store: Store, private router: Router) {}
 
   private subscriptions: Subscription = new Subscription();

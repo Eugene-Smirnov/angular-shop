@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GoodsRoutingModule } from './goods-routing.module';
-import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { GoodsListPageComponent } from './pages/goods-list-page/goods-list-page';
 import { StoreModule } from '@ngrx/store';
 import { BreadcrumpsComponent } from './components/breadcrumps/breadcrumps.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
@@ -17,7 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [CategoryPageComponent, BreadcrumpsComponent, ItemCardComponent],
+  declarations: [GoodsListPageComponent, BreadcrumpsComponent, ItemCardComponent],
   imports: [
     CommonModule,
     GoodsRoutingModule,
