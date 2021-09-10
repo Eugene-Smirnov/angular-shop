@@ -14,8 +14,8 @@ export const initialState: GoodsState = {
   categoryId: '',
   subCategoryId: '',
   itemId: '',
-  page: 1,
-  pagesTotal: 1,
+  lastItemIndex: 0,
+  isNotLastPage: true,
   sortingSettings: {
     sortBy: '',
     isDesc: true,
@@ -26,22 +26,22 @@ export const initialState: GoodsState = {
 export const goodsReducer = createReducer(
   initialState,
   on(loadCategoryGoods, (state, { categoryId }): GoodsState => {
-    return { ...initialState, categoryId };
+    return { ...initialState, goods: [...state.goods], categoryId };
   }),
   on(loadSubCategoryGoods, (state, { categoryId, subCategoryId }): GoodsState => {
-    return { ...initialState, categoryId, subCategoryId };
+    return { ...initialState, goods: [...state.goods], categoryId, subCategoryId };
   }),
   on(goodsLoadedSuccess, (state, { loadedGoods }): GoodsState => {
     return {
       ...initialState,
-      goods: [...loadedGoods],
-      pagesTotal: Math.ceil(loadedGoods.length / 10),
+      goods: [...state.goods, ...loadedGoods.slice(0, 10)],
+      isNotLastPage: !!loadedGoods[10],
     };
   }),
   on(addPage, (state): GoodsState => {
     return {
       ...state,
-      page: state.page + 1,
+      lastItemIndex: state.lastItemIndex + 10,
     };
   }),
   on(resetGoods, (): GoodsState => {

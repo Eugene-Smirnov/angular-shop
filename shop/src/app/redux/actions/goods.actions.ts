@@ -11,12 +11,12 @@ export const GOODS_ACTION_NAMES = {
 
 export const loadCategoryGoods = createAction(
   GOODS_ACTION_NAMES.LOAD_CATEGORY_GOODS,
-  props<{ categoryId: string }>(),
+  props<{ categoryId: string; fromIndex: number }>(),
 );
 
 export const loadSubCategoryGoods = createAction(
   GOODS_ACTION_NAMES.LOAD_SUBCATEGORY_GOODS,
-  props<{ categoryId: string; subCategoryId: string }>(),
+  props<{ categoryId: string; subCategoryId: string; fromIndex: number }>(),
 );
 
 export const goodsLoadedSuccess = createAction(

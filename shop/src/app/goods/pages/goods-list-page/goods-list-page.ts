@@ -9,7 +9,7 @@ import {
   resetGoods,
 } from 'src/app/redux/actions/goods.actions';
 import { getCategories } from 'src/app/redux/selectors/categories.selectors';
-import { getGoodsByPage, getPage, isNotLastPage } from 'src/app/redux/selectors/goods.selector';
+import { getGoods, getLastItemIndex, isNotLastPage } from 'src/app/redux/selectors/goods.selector';
 import { BreadcrumpModel } from '../../models/breadcrump.model';
 import { GoodsItemModel } from '../../models/goods-item.model';
 
@@ -27,19 +27,27 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
   breadcrumps: BreadcrumpModel[] = [];
 
-  goods$: Observable<GoodsItemModel[]> = this.store.select(getGoodsByPage);
+  goods$: Observable<GoodsItemModel[]> = this.store.select(getGoods);
 
-  page$: Observable<number> = this.store.select(getPage);
+  lastItemIndex$: Observable<number> = this.store.select(getLastItemIndex);
 
-  isNotLastPage$: Observable<boolean> = this.store.select(isNotLastPage).pipe();
+  lastItemIndex: number = 0;
+
+  isNotLastPage$: Observable<boolean> = this.store.select(isNotLastPage);
 
   ngOnInit(): void {
     const routerCategoryId = this.route.snapshot.params.categoryId;
     const routerSubCategoryId = this.route.snapshot.params.subCategoryId;
 
+    this.subscriptions.add(this.lastItemIndex$.subscribe((index) => (this.lastItemIndex = index)));
+
     if (routerSubCategoryId) {
       this.store.dispatch(
-        loadSubCategoryGoods({ categoryId: routerCategoryId, subCategoryId: routerSubCategoryId }),
+        loadSubCategoryGoods({
+          categoryId: routerCategoryId,
+          subCategoryId: routerSubCategoryId,
+          fromIndex: this.lastItemIndex,
+        }),
       );
 
       this.subscriptions.add(
@@ -61,7 +69,9 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
         }),
       );
     } else {
-      this.store.dispatch(loadCategoryGoods({ categoryId: routerCategoryId }));
+      this.store.dispatch(
+        loadCategoryGoods({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
+      );
       this.subscriptions.add(
         this.store.select(getCategories).subscribe((categories) => {
           const category = categories.find((cat) => cat.id === routerCategoryId);
@@ -81,6 +91,22 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
   }
 
   onMoreClick(): void {
+    const routerCategoryId = this.route.snapshot.params.categoryId;
+    const routerSubCategoryId = this.route.snapshot.params.subCategoryId;
+
     this.store.dispatch(addPage());
+    if (routerSubCategoryId) {
+      this.store.dispatch(
+        loadSubCategoryGoods({
+          categoryId: routerCategoryId,
+          subCategoryId: routerSubCategoryId,
+          fromIndex: this.lastItemIndex,
+        }),
+      );
+    } else {
+      this.store.dispatch(
+        loadCategoryGoods({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
+      );
+    }
   }
 }

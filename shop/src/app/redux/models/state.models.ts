@@ -14,8 +14,8 @@ export interface GoodsState {
   categoryId: string | '';
   subCategoryId: string | '';
   itemId: string | '';
-  page: number;
-  pagesTotal: number;
+  lastItemIndex: number;
+  isNotLastPage: boolean;
   sortingSettings: SortingSettingsModel;
   goods: GoodsItemModel[];
 }

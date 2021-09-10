@@ -10,12 +10,16 @@ import { GoodsItemModel } from '../models/goods-item.model';
 export class GoodsService {
   constructor(private http: HttpClient) {}
 
-  getByCategoryId(categoryId: string): Observable<GoodsItemModel[]> {
-    return this.http.get<GoodsItemModel[]>(categoryToURL(categoryId));
+  getByCategoryId(categoryId: string, fromIndex: number): Observable<GoodsItemModel[]> {
+    return this.http.get<GoodsItemModel[]>(categoryToURL(categoryId, fromIndex));
   }
 
-  getBySubCategoryId(categoryId: string, subCategoryId: string): Observable<GoodsItemModel[]> {
-    return this.http.get<GoodsItemModel[]>(subCategoryToURL(categoryId, subCategoryId));
+  getBySubCategoryId(
+    categoryId: string,
+    subCategoryId: string,
+    fromIndex: number,
+  ): Observable<GoodsItemModel[]> {
+    return this.http.get<GoodsItemModel[]>(subCategoryToURL(categoryId, subCategoryId, fromIndex));
   }
 
   getByItemId(itemId: string): Observable<GoodsItemModel[]> {

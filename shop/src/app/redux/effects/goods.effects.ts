@@ -15,7 +15,7 @@ export class LoadCategoryGoodsEffect {
     return this.actions$.pipe(
       ofType(loadCategoryGoods),
       mergeMap((action) => {
-        return this.goodsService.getByCategoryId(action.categoryId).pipe(
+        return this.goodsService.getByCategoryId(action.categoryId, action.fromIndex).pipe(
           map((goods) => goodsLoadedSuccess({ loadedGoods: goods })),
           catchError(() => EMPTY),
         );
@@ -32,10 +32,12 @@ export class LoadSubCategoryGoodsEffect {
     return this.actions$.pipe(
       ofType(loadSubCategoryGoods),
       mergeMap((action) => {
-        return this.goodsService.getBySubCategoryId(action.categoryId, action.subCategoryId).pipe(
-          map((goods) => goodsLoadedSuccess({ loadedGoods: goods })),
-          catchError(() => EMPTY),
-        );
+        return this.goodsService
+          .getBySubCategoryId(action.categoryId, action.subCategoryId, action.fromIndex)
+          .pipe(
+            map((goods) => goodsLoadedSuccess({ loadedGoods: goods })),
+            catchError(() => EMPTY),
+          );
       }),
     );
   });

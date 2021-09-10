@@ -8,4 +8,6 @@ export interface GoodsItemModel {
   description: string;
   isInCart: boolean;
   isFavorite: boolean;
+  category: string;
+  subCategory: string;
 }
