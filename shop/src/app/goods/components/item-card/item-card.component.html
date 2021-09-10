@@ -1,7 +1,7 @@
 <div class="item-card">
   <img class="item-card__image" src="{{ item.imageUrls[0] }}" alt="{{ item.name }}" />
   <div class="item-card__info">
-    <h3 class="item-card__heading">{{ item.name }}</h3>
+    <h3 class="item-card__heading" (click)="headingClick.emit(itemLink)">{{ item.name }}</h3>
     <p
       class="item-card__availible  {{ availableClass }}"
       *ngIf="item.availableAmount; else notAvailable"

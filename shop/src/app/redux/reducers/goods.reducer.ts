@@ -13,7 +13,6 @@ export const goodsFeatureKey = 'goodsState';
 export const initialState: GoodsState = {
   categoryId: '',
   subCategoryId: '',
-  itemId: '',
   lastItemIndex: 0,
   isNotLastPage: true,
   sortingSettings: {

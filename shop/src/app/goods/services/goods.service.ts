@@ -22,7 +22,7 @@ export class GoodsService {
     return this.http.get<GoodsItemModel[]>(subCategoryToURL(categoryId, subCategoryId, fromIndex));
   }
 
-  getByItemId(itemId: string): Observable<GoodsItemModel[]> {
-    return this.http.get<GoodsItemModel[]>(itemToURL(itemId));
+  getByItemId(itemId: string): Observable<GoodsItemModel> {
+    return this.http.get<GoodsItemModel>(itemToURL(itemId));
   }
 }

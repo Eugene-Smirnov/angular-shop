@@ -16,9 +16,10 @@ import {
 import { EffectsModule } from '@ngrx/effects';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { ItemDescriptionPageComponent } from './pages/item-description-page/item-description-page.component';
 
 @NgModule({
-  declarations: [GoodsListPageComponent, BreadcrumpsComponent, ItemCardComponent],
+  declarations: [GoodsListPageComponent, BreadcrumpsComponent, ItemCardComponent, ItemDescriptionPageComponent],
   imports: [
     CommonModule,
     GoodsRoutingModule,

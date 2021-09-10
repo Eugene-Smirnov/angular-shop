@@ -86,7 +86,7 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(resetGoods());
   }
 
-  onBreadcrumpClick(path: string): void {
+  onLinkClick(path: string): void {
     this.router.navigate([path]);
   }
 

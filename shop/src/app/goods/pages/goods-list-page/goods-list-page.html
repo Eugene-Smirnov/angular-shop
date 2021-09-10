@@ -1,11 +1,11 @@
 <app-breadcrumps
   [breadcrumps]="breadcrumps"
-  (breadcrumpClick)="onBreadcrumpClick($event)"
+  (breadcrumpClick)="onLinkClick($event)"
 ></app-breadcrumps>
 <h2>{{ headingName }}</h2>
 <div class="card" *ngFor="let item of goods$ | async">
   <mat-divider></mat-divider>
-  <app-item-card [item]="item"></app-item-card>
+  <app-item-card [item]="item" (headingClick)="onLinkClick($event)"></app-item-card>
 </div>
 <button mat-raised-button *ngIf="isNotLastPage$ | async" color="accent" (click)="onMoreClick()">
   Показать больше

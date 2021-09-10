@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GoodsItemModel } from '../../models/goods-item.model';
 
 @Component({
@@ -9,12 +9,15 @@ import { GoodsItemModel } from '../../models/goods-item.model';
 export class ItemCardComponent {
   @Input() item!: GoodsItemModel;
 
-  availableClass = 'item-card__available_';
+  @Output() headingClick: EventEmitter<string> = new EventEmitter();
 
-  // _not
+  itemLink = '';
+
+  availableClass = 'item-card__available_';
 
   ngOnInit() {
     this.setAvailableClass();
+    this.itemLink = `/goods/${this.item.id}`;
   }
 
   setAvailableClass(): void {

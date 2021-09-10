@@ -13,7 +13,6 @@ export interface CategoriesState {
 export interface GoodsState {
   categoryId: string | '';
   subCategoryId: string | '';
-  itemId: string | '';
   lastItemIndex: number;
   isNotLastPage: boolean;
   sortingSettings: SortingSettingsModel;
