@@ -1,7 +1,7 @@
-<app-breadcrumps
-  [breadcrumps]="breadcrumps"
-  (breadcrumpClick)="onLinkClick($event)"
-></app-breadcrumps>
+<app-breadcrumbs
+  [breadcrumbs]="breadcrumbs"
+  (breadcrumbClick)="onLinkClick($event)"
+></app-breadcrumbs>
 <h2>{{ headingName }}</h2>
 <div class="card" *ngFor="let item of goods$ | async">
   <mat-divider></mat-divider>

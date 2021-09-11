@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
-import { getCategories } from 'src/app/redux/selectors/categories.selectors';
+import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
 import { CategoryModel } from '../../models/category.model';
 import { SubCategoryModel } from '../../models/subcategory.model';
 
@@ -20,7 +20,7 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
 
   activeCategoryControl = new FormControl('');
 
-  categories$ = this.store.select(getCategories);
+  categories$ = this.store.select(selectCategories);
 
   activeCategoryId$: Observable<string> = this.activeCategoryControl.valueChanges.pipe(
     debounceTime(200),

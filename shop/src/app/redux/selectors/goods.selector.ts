@@ -2,14 +2,14 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { GoodsState } from '../models/state.models';
 import { goodsFeatureKey } from '../reducers/goods.reducer';
 
-export const getGoodsState = createFeatureSelector<GoodsState>(goodsFeatureKey);
+export const selectGoodsState = createFeatureSelector<GoodsState>(goodsFeatureKey);
 
-export const getGoods = createSelector(getGoodsState, (state) => state.goods);
+export const selectGoods = createSelector(selectGoodsState, (state) => state.goods);
 
-export const getCategoryId = createSelector(getGoodsState, (state) => state.categoryId);
+export const selectCategoryId = createSelector(selectGoodsState, (state) => state.categoryId);
 
-export const getSubCategoryId = createSelector(getGoodsState, (state) => state.subCategoryId);
+export const selectSubCategoryId = createSelector(selectGoodsState, (state) => state.subCategoryId);
 
-export const getLastItemIndex = createSelector(getGoodsState, (state) => state.lastItemIndex);
+export const selectLastItemIndex = createSelector(selectGoodsState, (state) => state.lastItemIndex);
 
-export const isNotLastPage = createSelector(getGoodsState, (state) => state.isNotLastPage);
+export const selectIsNotLastPage = createSelector(selectGoodsState, (state) => state.isNotLastPage);

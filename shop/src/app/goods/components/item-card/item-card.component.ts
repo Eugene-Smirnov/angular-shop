@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GoodsItemModel } from '../../models/goods-item.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { GoodsItemModel } from '../../models/goods-item.model';
   templateUrl: './item-card.component.html',
   styleUrls: ['./item-card.component.scss'],
 })
-export class ItemCardComponent {
+export class ItemCardComponent implements OnInit {
   @Input() item!: GoodsItemModel;
 
   @Output() headingClick: EventEmitter<string> = new EventEmitter();
@@ -17,7 +17,7 @@ export class ItemCardComponent {
 
   ngOnInit() {
     this.setAvailableClass();
-    this.itemLink = `/goods/${this.item.id}`;
+    this.itemLink = `/goods/item/${this.item.id}`;
   }
 
   setAvailableClass(): void {

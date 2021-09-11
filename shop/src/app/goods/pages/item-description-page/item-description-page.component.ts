@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { getCategories } from 'src/app/redux/selectors/categories.selectors';
-import { BreadcrumpModel } from '../../models/breadcrump.model';
+import { CategoryModel } from 'src/app/core/models/category.model';
+import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
+import { BreadcrumbModel } from '../../models/breadcrumb.model';
 import { GoodsItemModel } from '../../models/goods-item.model';
 import { GoodsService } from '../../services/goods.service';
 
@@ -24,13 +25,15 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
     this.item$ = this.goodsService.getByItemId(routerItemId);
   }
 
+  categories$: Observable<CategoryModel[]> = this.store.select(selectCategories);
+
   item$: Observable<GoodsItemModel>;
 
   item!: GoodsItemModel;
 
   subscriptions: Subscription = new Subscription();
 
-  breadcrumps: BreadcrumpModel[] = [];
+  breadcrumbs: BreadcrumbModel[] = [];
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -43,7 +46,7 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
       this.item$
         .pipe(
           switchMap((item) => {
-            return this.store.select(getCategories).pipe(
+            return this.categories$.pipe(
               map((categories) => {
                 return {
                   item,
@@ -60,7 +63,7 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
             (subCat) => subCat.id === item.subCategory,
           );
           if (!subCategory) return;
-          this.breadcrumps = [
+          this.breadcrumbs = [
             {
               name: category.name,
               path: `/goods/${category.id}`,
@@ -76,5 +79,9 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  onLinkClick(link: string) {
+    this.router.navigate([link]);
   }
 }

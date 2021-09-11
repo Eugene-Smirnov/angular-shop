@@ -5,7 +5,7 @@ import { ItemDescriptionPageComponent } from './pages/item-description-page/item
 
 const routes: Routes = [
   {
-    path: ':itemId',
+    path: 'item/:itemId',
     component: ItemDescriptionPageComponent,
   },
   {

@@ -1,2 +1,5 @@
-<app-breadcrumps [breadcrumps]="breadcrumps"></app-breadcrumps>
+<app-breadcrumbs
+  [breadcrumbs]="breadcrumbs"
+  (breadcrumbClick)="onLinkClick($event)"
+></app-breadcrumbs>
 <h2>{{ item.name }}</h2>
