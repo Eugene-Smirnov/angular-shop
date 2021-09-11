@@ -16,6 +16,7 @@ import {
 import { EffectsModule } from '@ngrx/effects';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 import { ItemDescriptionPageComponent } from './pages/item-description-page/item-description-page.component';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ItemDescriptionPageComponent } from './pages/item-description-page/item
     EffectsModule.forFeature([LoadCategoryGoodsEffect, LoadSubCategoryGoodsEffect]),
     MatButtonModule,
     MatDividerModule,
+    MatBadgeModule,
   ],
   providers: [GoodsService],
 })

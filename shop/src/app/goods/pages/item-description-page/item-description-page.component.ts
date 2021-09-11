@@ -23,25 +23,27 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
   ) {
     const routerItemId: string = this.route.snapshot.params.itemId;
     this.item$ = this.goodsService.getByItemId(routerItemId);
+    this.subscriptions.add(
+      this.item$.subscribe((item) => {
+        this.item = item;
+        this.rating = `${item.rating}/5`;
+      }),
+    );
   }
 
   categories$: Observable<CategoryModel[]> = this.store.select(selectCategories);
 
   item$: Observable<GoodsItemModel>;
 
-  item!: GoodsItemModel;
+  item: GoodsItemModel | undefined;
+
+  rating: string = '0/5';
 
   subscriptions: Subscription = new Subscription();
 
   breadcrumbs: BreadcrumbModel[] = [];
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.item$.subscribe((item) => {
-        this.item = item;
-      }),
-    );
-
     this.subscriptions.add(
       this.item$
         .pipe(
