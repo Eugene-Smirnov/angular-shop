@@ -10,9 +10,14 @@
   </button>
   <mat-form-field class="search-form-field" appearance="fill">
     <mat-label>{{ placeholder }}</mat-label>
-    <button matPrefix mat-icon-button aria-label="Search">🔎</button>
-    <input matInput type="text" [(ngModel)]="value" />
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
+    <input matInput type="text" [formControl]="searchValue" />
+    <button
+      *ngIf="searchValue.valueChanges | async"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="resetSearchValue()"
+    >
       &#10006;
     </button>
   </mat-form-field>

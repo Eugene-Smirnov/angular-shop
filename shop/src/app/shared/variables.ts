@@ -16,3 +16,5 @@ export function subCategoryToURL(
 export function itemToURL(itemId: string): string {
   return `${SERVER_URL}/goods/item/${itemId}`;
 }
+
+export const GOODS_SEARCH_URL = `${SERVER_URL}/goods/search?text=`;
