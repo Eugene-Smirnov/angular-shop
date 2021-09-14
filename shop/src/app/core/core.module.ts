@@ -19,6 +19,7 @@ import * as fromCategoriesReducer from '../redux/reducers/categories.reducers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { LoadCategoriesEffect } from '../redux/effects/categories.effects';
+import { HeaderSearchResultsComponent } from './components/header/header-search-results/header-search-results.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LoadCategoriesEffect } from '../redux/effects/categories.effects';
     HeaderInfoComponent,
     HeaderNavigationComponent,
     CategoriesPageComponent,
+    HeaderSearchResultsComponent,
   ],
   imports: [
     CommonModule,

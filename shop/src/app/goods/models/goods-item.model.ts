@@ -1,7 +1,7 @@
 export interface GoodsItemModel {
   id: string;
   name: string;
-  imageUrls: [string];
+  imageUrls: string[];
   rating: number;
   availableAmount: number;
   price: number;

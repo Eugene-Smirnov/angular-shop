@@ -21,8 +21,11 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
     private store: Store,
     private goodsService: GoodsService,
   ) {
-    const routerItemId: string = this.route.snapshot.params.itemId;
-    this.item$ = this.goodsService.getByItemId(routerItemId);
+    this.item$ = this.route.params.pipe(
+      map((params) => params.itemId as string),
+      switchMap((routerItemId) => this.goodsService.getByItemId(routerItemId)),
+    );
+
     this.subscriptions.add(
       this.item$.subscribe((item) => {
         this.item = item;

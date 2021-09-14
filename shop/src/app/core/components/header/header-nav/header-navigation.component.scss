@@ -54,6 +54,12 @@
 }
 
 .search-form-field {
-  margin: 0 0.5rem;
-  flex-grow: 2;
+  &__wrapper {
+    margin: 0 0.5rem;
+    flex-grow: 2;
+    position: relative;
+    top: 0.6rem;
+  }
+
+  width: 100%;
 }
