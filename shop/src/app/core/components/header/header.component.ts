@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private searchService: SearchService,
     public dialog: MatDialog,
+    private searchService: SearchService,
   ) {}
 
   isSearchResultsOpened: boolean = false;
@@ -50,8 +50,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openLogin(): void {
-    const dialogRef = this.dialog.open(LoginComponent);
-    dialogRef.afterClosed().subscribe((result) => console.log(`Dialog result: ${result}`));
+    this.dialog.open(LoginComponent);
   }
 
   onIsClickOnSearchResults(value: boolean) {

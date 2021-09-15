@@ -4,11 +4,21 @@
       <div class="login__form">
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Логин</mat-label>
-          <input matInput />
+          <input
+            matInput
+            type="text"
+            [formControl]="loginControl"
+            [value]="loginControl.valueChanges | async"
+          />
         </mat-form-field>
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Пароль</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            [formControl]="passwordControl"
+            [value]="passwordControl.valueChanges | async"
+          />
           <button
             mat-icon-button
             matSuffix
@@ -22,7 +32,9 @@
       </div>
       <div class="login__buttons">
         <button class="login__button" mat-stroked-button color="warn">Отмена</button>
-        <button class="login__button" mat-flat-button color="primary">Войти</button>
+        <button class="login__button" mat-flat-button color="primary" (click)="onLoginClick()">
+          Войти
+        </button>
       </div>
     </mat-tab>
     <mat-tab label="Регистрация">
@@ -37,11 +49,21 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Логин</mat-label>
-          <input matInput />
+          <input
+            matInput
+            type="text"
+            [formControl]="loginControl"
+            [value]="loginControl.valueChanges | async"
+          />
         </mat-form-field>
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Пароль</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            [formControl]="passwordControl"
+            [value]="passwordControl.valueChanges | async"
+          />
           <button
             mat-icon-button
             matSuffix

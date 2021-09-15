@@ -34,3 +34,18 @@ export function getSubCategoryLink(subCategory: SubCategorySearchModel): [string
 export function getGoodsLink(item: GoodsItemModel): [string] {
   return [`/goods/item/${item.id}`];
 }
+
+export const AUTH_TOKEN_KEY = 'EUGENE_SMIRNOV_ANGULAR_SHOP_TOKEN';
+
+export const USERS_API_URL = `${SERVER_URL}/users`;
+export const USERS_API_URLS = {
+  LOGIN: `${USERS_API_URL}/login`,
+  REGISTER: `${USERS_API_URL}/register`,
+  INFO: `${USERS_API_URL}/userInfo`,
+  FAVORITES: `${USERS_API_URL}/favorites`,
+  FAVORITES_DEL: `${USERS_API_URL}/favorites?id=`,
+  CART: `${USERS_API_URL}/cart`,
+  CART_DEL: `${USERS_API_URL}/cart?id=`,
+  ORDER: `${USERS_API_URL}/order`,
+  ORDER_DEL: `${USERS_API_URL}/order?id=`,
+};
