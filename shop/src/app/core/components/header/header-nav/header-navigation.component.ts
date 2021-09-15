@@ -13,6 +13,8 @@ export class HeaderNavigationComponent implements OnInit, OnDestroy {
 
   @Output() toMain = new EventEmitter();
 
+  @Output() loginClick = new EventEmitter();
+
   @Output() searchInputChange = new EventEmitter<string>();
 
   searchValue = new FormControl('');

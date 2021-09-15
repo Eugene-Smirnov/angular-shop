@@ -1,0 +1,62 @@
+<div class="login__wrapper">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Вход">
+      <div class="login__form">
+        <mat-form-field appearance="fill" class="login__input">
+          <mat-label>Логин</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="login__input">
+          <mat-label>Пароль</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="login__buttons">
+        <button class="login__button" mat-stroked-button color="warn">Отмена</button>
+        <button class="login__button" mat-flat-button color="primary">Войти</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Регистрация">
+      <div class="login__form">
+        <mat-form-field appearance="fill" class="login__input">
+          <mat-label>Имя</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="login__input">
+          <mat-label>Фамилия</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="login__input">
+          <mat-label>Логин</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="login__input">
+          <mat-label>Пароль</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="login__buttons">
+        <button class="login__button" mat-stroked-button color="warn">Отмена</button>
+        <button class="login__button" mat-flat-button color="primary">Зарегестрироваться</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -34,7 +34,7 @@
   <mat-menu #menu xPosition="before">
     <div class="user-info">
       <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
-      <button mat-raised-button color="primary">Вход</button>
+      <button mat-raised-button color="primary" (click)="loginClick.emit()">Вход</button>
     </div>
     <mat-divider></mat-divider>
     <button mat-menu-item>&#9825; Избранное</button>

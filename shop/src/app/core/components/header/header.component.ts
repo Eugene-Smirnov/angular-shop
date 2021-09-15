@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 import { GoodsItemModel } from 'src/app/goods/models/goods-item.model';
 import { loadCategories } from 'src/app/redux/actions/categories.actions';
 import { CategoryModel } from '../../models/category.model';
 import { SubCategorySearchModel } from '../../models/subcategory.model';
 import { SearchService } from '../../services/search.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,12 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private store: Store, private router: Router, private searchService: SearchService) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private searchService: SearchService,
+    public dialog: MatDialog,
+  ) {}
 
   isSearchResultsOpened: boolean = false;
 
@@ -40,6 +47,11 @@ export class HeaderComponent implements OnInit {
       .searchSubCategory(value)
       .subscribe((subCategories) => (this.searchSubCategories = subCategories));
     this.searchService.searchGoods(value).subscribe((goods) => (this.searchGoods = goods));
+  }
+
+  openLogin(): void {
+    const dialogRef = this.dialog.open(LoginComponent);
+    dialogRef.afterClosed().subscribe((result) => console.log(`Dialog result: ${result}`));
   }
 
   onIsClickOnSearchResults(value: boolean) {
