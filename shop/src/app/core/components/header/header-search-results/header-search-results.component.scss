@@ -6,8 +6,8 @@
     top: 7.4rem;
     z-index: 3;
 
-    width: 90%;
-    margin: 0 5%;
+    width: 60%;
+    margin: 0 20%;
     max-height: 75vh;
 
     overflow-y: scroll;
@@ -44,8 +44,8 @@
     margin: 1rem;
 
     &__image {
-      width: 8rem;
-      height: 8rem;
+      width: 4rem;
+      height: 4rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -55,9 +55,13 @@
       }
     }
 
+    &__container {
+      display: flex;
+    }
+
     &__info {
       margin: 0 1rem;
-      width: calc(100% - 10rem);
+      width: calc(100% - 7rem);
     }
 
     &__name {
@@ -66,6 +70,10 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    &__availability {
+      margin: 0 1rem;
     }
   }
 }

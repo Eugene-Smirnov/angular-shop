@@ -27,8 +27,10 @@ export class HeaderSearchResultsComponent implements OnInit, OnDestroy {
   getGoodsLink = getGoodsLink;
 
   elementRef: HTMLElement | null = null;
+  // @ViewChild for HTMLelements
 
   listener = (e: MouseEvent) => {
+    // TOOD: onClickOutside - directive
     if (!this.elementRef) return;
     if (this.elementRef.contains(e.target as Node)) {
       this.isClickOnComponent.emit(true);

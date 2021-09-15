@@ -24,14 +24,15 @@
         <h4 class="search-results-item__name" (click)="onLinkClick(getGoodsLink(item))">
           {{ item.name }}
         </h4>
-        <p class="search-results-item__price">{{ item.price }} р.</p>
-        <p class="search-results-item__rating">{{ item.rating }}/5</p>
-        <p class="search-results-item__availability" *ngIf="!!item.availableAmount">
-          Есть в наличии
-        </p>
-        <p class="search-results-item__availability_none" *ngIf="!item.availableAmount">
-          Нет в наличии
-        </p>
+        <div class="search-results-item__container">
+          <p class="search-results-item__price">{{ item.price }} р.</p>
+          <p class="search-results-item__availability" *ngIf="!!item.availableAmount">
+            Есть в наличии
+          </p>
+          <p class="search-results-item__availability_none" *ngIf="!item.availableAmount">
+            Нет в наличии
+          </p>
+        </div>
         <mat-divider></mat-divider>
       </div>
     </div>
