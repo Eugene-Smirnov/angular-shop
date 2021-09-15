@@ -9,7 +9,7 @@ import { OrderModel } from '../models/order.model';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class UserService {
   constructor(private http: HttpClient) {}
 
   login(login: string, password: string): Observable<boolean> {

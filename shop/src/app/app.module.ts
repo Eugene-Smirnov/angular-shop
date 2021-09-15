@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { AuthInterceptor } from './user/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
