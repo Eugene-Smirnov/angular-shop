@@ -32,7 +32,8 @@
     padding: 0.5rem 0.75rem;
   }
 
-  &__working-hours {
+  &__working-hours,
+  &__watch {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,5 +42,9 @@
     h6 {
       margin: 0 0.5rem;
     }
+  }
+
+  &__watch {
+    margin-left: 0.5rem;
   }
 }

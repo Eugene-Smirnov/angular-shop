@@ -6,6 +6,7 @@
     (click)="toCategories.emit()"
     routerLinkActive="active"
   >
+    <mat-icon>view_list</mat-icon>
     Каталог товаров
   </button>
   <div class="search-form-field__wrapper">
@@ -29,7 +30,7 @@
     </mat-form-field>
   </div>
   <button class="header-nav__button" mat-stroked-button [matMenuTriggerFor]="menu">
-    Аккаунт &#9660;
+    <mat-icon>account_circle</mat-icon> Аккаунт &#9660;
   </button>
   <mat-menu #menu xPosition="before">
     <div class="user" *ngIf="!userInfo">
@@ -47,9 +48,11 @@
         <button mat-raised-button color="primary" (click)="logoutClick.emit()">Выход</button>
       </div>
       <mat-divider class="user__divider"></mat-divider>
-      <button mat-menu-item>&#9825; Избранное</button>
-      <button mat-menu-item>&#19908; Лист ожидания</button>
+      <button mat-menu-item><mat-icon>favorite</mat-icon> Избранное</button>
+      <button mat-menu-item><mat-icon>pending_actions</mat-icon> Лист ожидания</button>
     </div>
   </mat-menu>
-  <button class="header-nav__button" mat-stroked-button>🛒 Корзина</button>
+  <button class="header-nav__button" mat-stroked-button>
+    <mat-icon>shopping_cart</mat-icon> Корзина
+  </button>
 </div>

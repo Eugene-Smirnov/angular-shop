@@ -10,18 +10,29 @@
       <button mat-button [matMenuTriggerFor]="menu">Ещё &#9660;</button>
       <mat-menu #menu xPosition="before">
         <button mat-menu-item class="header-info__more-contacts-item">
-          life:) : +375(08)7654321
+          <mat-icon>call</mat-icon> +375(08)7654321 ( life:) )
         </button>
         <button mat-menu-item class="header-info__more-contacts-item">
-          Телефон: +375(08)7654321
+          <mat-icon>call</mat-icon> +375(08)7654321 ( A1 )
         </button>
-        <button mat-menu-item class="header-info__more-contacts-item">Telegram</button>
-        <button mat-menu-item class="header-info__more-contacts-item">Почта</button>
-        <button mat-menu-item class="header-info__more-contacts-item">Заказать звонок</button>
-        <button mat-menu-item class="header-info__more-contacts-item">Написать нам</button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>telegram</mat-icon> Telegram
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>mail</mat-icon> Почта
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>perm_phone_msg</mat-icon> Заказать звонок
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>message</mat-icon> Написать нам
+        </button>
       </mat-menu>
     </div>
-    <mat-divider vertical="true"></mat-divider>
+    <mat-divider vertical></mat-divider>
+    <div class="header-info__watch mat-hint">
+      <mat-icon>watch_later</mat-icon>
+    </div>
     <div class="header-info__working-hours">
       <h6 class="mat-hint">контакт-центр</h6>
       <h6 class="mat-hint">с 8:00 до 22:00</h6>
