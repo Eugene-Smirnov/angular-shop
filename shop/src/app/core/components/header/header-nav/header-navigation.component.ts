@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { UserInfoModel } from 'src/app/user/models/user-info.model';
 
 @Component({
   selector: 'app-header-navigation',
@@ -9,11 +10,15 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./header-navigation.component.scss'],
 })
 export class HeaderNavigationComponent implements OnInit, OnDestroy {
+  @Input() userInfo: UserInfoModel | null = null;
+
   @Output() toCategories = new EventEmitter();
 
   @Output() toMain = new EventEmitter();
 
   @Output() loginClick = new EventEmitter();
+
+  @Output() logoutClick = new EventEmitter();
 
   @Output() searchInputChange = new EventEmitter<string>();
 

@@ -41,6 +41,19 @@
   }
 }
 
+.user {
+  width: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &_logged {
+    width: 12rem;
+  }
+  &__divider {
+    width: 100%;
+  }
+}
+
 .user-info {
   margin: 1rem;
   display: flex;

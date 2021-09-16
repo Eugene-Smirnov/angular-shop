@@ -1,3 +1,4 @@
+/* eslint-disable ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -8,6 +9,10 @@ import { CategoryModel } from '../../models/category.model';
 import { SubCategorySearchModel } from '../../models/subcategory.model';
 import { SearchService } from '../../services/search.service';
 import { LoginComponent } from '../login/login.component';
+import { UserInfoModel } from 'src/app/user/models/user-info.model';
+import { loadUserInfo, logOut } from 'src/app/redux/actions/user.actions';
+import { Observable } from 'rxjs';
+import { selectUserInfo } from 'src/app/redux/selectors/user.selector';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +27,8 @@ export class HeaderComponent implements OnInit {
     private searchService: SearchService,
   ) {}
 
+  userInfo$: Observable<UserInfoModel | null> = this.store.select(selectUserInfo);
+
   isSearchResultsOpened: boolean = false;
 
   searchCategories: CategoryModel[] = [];
@@ -31,6 +38,7 @@ export class HeaderComponent implements OnInit {
   searchGoods: GoodsItemModel[] = [];
 
   ngOnInit() {
+    this.store.dispatch(loadUserInfo());
     this.store.dispatch(loadCategories());
   }
 
@@ -51,6 +59,10 @@ export class HeaderComponent implements OnInit {
 
   openLogin(): void {
     this.dialog.open(LoginComponent);
+  }
+
+  onLogoutClick(): void {
+    this.store.dispatch(logOut());
   }
 
   onIsClickOnSearchResults(value: boolean) {

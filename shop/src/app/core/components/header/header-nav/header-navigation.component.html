@@ -32,13 +32,24 @@
     Аккаунт &#9660;
   </button>
   <mat-menu #menu xPosition="before">
-    <div class="user-info">
-      <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
-      <button mat-raised-button color="primary" (click)="loginClick.emit()">Вход</button>
+    <div class="user" *ngIf="!userInfo">
+      <div class="user-info">
+        <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
+        <button mat-raised-button color="primary" (click)="loginClick.emit()">Вход</button>
+      </div>
     </div>
-    <mat-divider></mat-divider>
-    <button mat-menu-item>&#9825; Избранное</button>
-    <button mat-menu-item>&#19908; Лист ожидания</button>
+
+    <div class="user user_logged" *ngIf="userInfo">
+      <div class="user-info">
+        <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
+        <p>Здравствуйте,</p>
+        <p>{{ userInfo.firstName }} {{ userInfo.lastName }}!</p>
+        <button mat-raised-button color="primary" (click)="logoutClick.emit()">Выход</button>
+      </div>
+      <mat-divider class="user__divider"></mat-divider>
+      <button mat-menu-item>&#9825; Избранное</button>
+      <button mat-menu-item>&#19908; Лист ожидания</button>
+    </div>
   </mat-menu>
   <button class="header-nav__button" mat-stroked-button>🛒 Корзина</button>
 </div>

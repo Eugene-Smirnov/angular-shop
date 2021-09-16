@@ -49,3 +49,5 @@ export const USERS_API_URLS = {
   ORDER: `${USERS_API_URL}/order`,
   ORDER_DEL: `${USERS_API_URL}/order?id=`,
 };
+
+export const LOGIN_DIALOG_ID = 'LOGIN_DIALOG_ID';

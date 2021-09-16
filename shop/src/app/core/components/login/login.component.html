@@ -31,7 +31,9 @@
         </mat-form-field>
       </div>
       <div class="login__buttons">
-        <button class="login__button" mat-stroked-button color="warn">Отмена</button>
+        <button class="login__button" mat-stroked-button color="warn" mat-dialog-close>
+          Отмена
+        </button>
         <button class="login__button" mat-flat-button color="primary" (click)="onLoginClick()">
           Войти
         </button>
@@ -41,11 +43,21 @@
       <div class="login__form">
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Имя</mat-label>
-          <input matInput />
+          <input
+            matInput
+            [formControl]="firstNameControl"
+            [value]="firstNameControl.valueChanges | async"
+            type="text"
+          />
         </mat-form-field>
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Фамилия</mat-label>
-          <input matInput />
+          <input
+            matInput
+            [formControl]="lastNameControl"
+            [value]="lastNameControl.valueChanges | async"
+            type="text"
+          />
         </mat-form-field>
         <mat-form-field appearance="fill" class="login__input">
           <mat-label>Логин</mat-label>
@@ -76,8 +88,12 @@
         </mat-form-field>
       </div>
       <div class="login__buttons">
-        <button class="login__button" mat-stroked-button color="warn">Отмена</button>
-        <button class="login__button" mat-flat-button color="primary">Зарегестрироваться</button>
+        <button class="login__button" mat-stroked-button color="warn" mat-dialog-close>
+          Отмена
+        </button>
+        <button class="login__button" mat-flat-button color="primary" (click)="onRegisterClick()">
+          Зарегестрироваться
+        </button>
       </div>
     </mat-tab>
   </mat-tab-group>

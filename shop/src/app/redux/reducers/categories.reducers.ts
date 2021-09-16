@@ -6,7 +6,7 @@ export const categoriesFeatureKey = 'categoriesState';
 
 export const initialState: CategoriesState = { categories: [] };
 
-export const youtubeApiReducer = createReducer(
+export const categoriesReducer = createReducer(
   initialState,
   on(loadCategories, (): CategoriesState => {
     return { ...initialState };

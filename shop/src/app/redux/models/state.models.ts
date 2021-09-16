@@ -1,5 +1,6 @@
 import { CategoryModel } from 'src/app/core/models/category.model';
 import { GoodsItemModel } from 'src/app/goods/models/goods-item.model';
+import { UserInfoModel } from 'src/app/user/models/user-info.model';
 import { SortingSettingsModel } from './sorting-settings.model';
 
 export interface AppState {
@@ -17,4 +18,8 @@ export interface GoodsState {
   isNotLastPage: boolean;
   sortingSettings: SortingSettingsModel;
   goods: GoodsItemModel[];
+}
+
+export interface UserState {
+  info: UserInfoModel | null;
 }

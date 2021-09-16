@@ -4,7 +4,9 @@
   (toCategories)="onCategoriesClick()"
   (toMain)="onLogoClick()"
   (loginClick)="openLogin()"
+  (logoutClick)="onLogoutClick()"
   (searchInputChange)="onSearchInputChange($event)"
+  [userInfo]="userInfo$ | async"
 ></app-header-navigation>
 <mat-divider></mat-divider>
 <app-header-search-results

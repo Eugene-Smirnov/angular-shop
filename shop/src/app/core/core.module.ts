@@ -49,7 +49,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     StoreModule.forFeature(
       fromCategoriesReducer.categoriesFeatureKey,
-      fromCategoriesReducer.youtubeApiReducer,
+      fromCategoriesReducer.categoriesReducer,
     ),
     EffectsModule.forFeature([LoadCategoriesEffect]),
   ],

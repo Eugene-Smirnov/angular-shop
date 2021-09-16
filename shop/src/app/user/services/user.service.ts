@@ -12,6 +12,10 @@ import { OrderModel } from '../models/order.model';
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  getToken(): string | null {
+    return window.localStorage.getItem(AUTH_TOKEN_KEY);
+  }
+
   login(login: string, password: string): Observable<boolean> {
     return this.http.post<{ token: string }>(USERS_API_URLS.LOGIN, { login, password }).pipe(
       map(({ token }) => {
@@ -26,18 +30,30 @@ export class UserService {
     window.localStorage.removeItem(AUTH_TOKEN_KEY);
   }
 
-  register(login: string, password: string, firstName: string, lastName: string): void {
-    this.http
+  register(
+    login: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+  ): Observable<boolean> {
+    return this.http
       .post<{ token: string }>(USERS_API_URLS.REGISTER, { firstName, lastName, login, password })
       .pipe(
         map(({ token }) => {
           window.localStorage.setItem(AUTH_TOKEN_KEY, token);
+          return true;
         }),
+        catchError(() => of(false)),
       );
   }
 
-  getUserInfo(): Observable<UserInfoModel | boolean> {
-    return this.http.get<UserInfoModel>(USERS_API_URLS.INFO).pipe(catchError(() => of(false)));
+  getUserInfo(): Observable<UserInfoModel | null> {
+    return this.http.get<UserInfoModel>(USERS_API_URLS.INFO).pipe(
+      catchError(() => {
+        this.logout();
+        return of(null);
+      }),
+    );
   }
 
   addFavorite(itemId: string): void {
