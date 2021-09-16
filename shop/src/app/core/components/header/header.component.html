@@ -1,8 +1,7 @@
 <app-header-info></app-header-info>
 <mat-divider></mat-divider>
 <app-header-navigation
-  (toCategories)="onCategoriesClick()"
-  (toMain)="onLogoClick()"
+  (navigateClick)="onLinkClick([$event])"
   (loginClick)="openLogin()"
   (logoutClick)="onLogoutClick()"
   (searchInputChange)="onSearchInputChange($event)"

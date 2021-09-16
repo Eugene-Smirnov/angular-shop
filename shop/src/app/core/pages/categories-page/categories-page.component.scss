@@ -5,6 +5,15 @@
 
 .categories-list {
   margin-right: 1rem;
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    span {
+      margin-left: 1rem;
+    }
+  }
 }
 
 .subcategories-list {

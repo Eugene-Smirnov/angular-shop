@@ -72,12 +72,4 @@ export class HeaderComponent implements OnInit {
   onLinkClick(value: [string]) {
     this.router.navigate(value);
   }
-
-  onCategoriesClick() {
-    this.onLinkClick(['/categories']);
-  }
-
-  onLogoClick() {
-    this.onLinkClick(['/']);
-  }
 }

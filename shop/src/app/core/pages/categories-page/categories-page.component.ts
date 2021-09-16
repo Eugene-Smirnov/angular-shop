@@ -89,4 +89,21 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     if (!subCategoryId || !this.activeCategory) return;
     this.router.navigate([`/goods/${this.activeCategory.id}/${subCategoryId}`]);
   }
+
+  getCategoryIcon(categoryId: string): string {
+    switch (categoryId) {
+      case 'appliances':
+        return 'kitchen';
+      case 'electronics':
+        return 'electrical_services';
+      case 'computers-peripherals':
+        return 'computer';
+      case 'furniture':
+        return 'chair';
+      case 'hobbies':
+        return 'self_improvement';
+      default:
+        return '';
+    }
+  }
 }

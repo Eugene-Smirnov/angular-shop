@@ -12,9 +12,7 @@ import { UserInfoModel } from 'src/app/user/models/user-info.model';
 export class HeaderNavigationComponent implements OnInit, OnDestroy {
   @Input() userInfo: UserInfoModel | null = null;
 
-  @Output() toCategories = new EventEmitter();
-
-  @Output() toMain = new EventEmitter();
+  @Output() navigateClick = new EventEmitter<string>();
 
   @Output() loginClick = new EventEmitter();
 

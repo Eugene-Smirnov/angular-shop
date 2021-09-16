@@ -8,8 +8,12 @@
         #categoryButton
         (mouseenter)="onCategoryHover(categoryButton.value)"
         (click)="onCategoryClick(categoryButton.value)"
-        >{{ category.name }}</mat-button-toggle
       >
+        <div class="categories-list__item">
+          <mat-icon>{{ getCategoryIcon(category.id) }}</mat-icon>
+          <span>{{ category.name }}</span>
+        </div>
+      </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <mat-divider vertical></mat-divider>

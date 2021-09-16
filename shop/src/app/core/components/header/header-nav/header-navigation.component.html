@@ -1,14 +1,16 @@
 <div class="header-nav__wrapper">
-  <h1 class="logo header-nav__logo" (click)="toMain.emit()">XXIIvek.by</h1>
-  <button
-    class="header-nav__button"
-    mat-stroked-button
-    (click)="toCategories.emit()"
-    routerLinkActive="active"
-  >
-    <mat-icon>view_list</mat-icon>
-    Каталог товаров
-  </button>
+  <h1 class="logo header-nav__logo" (click)="navigateClick.emit('')">XXIIvek.by</h1>
+  <a routerLink="/categories">
+    <button
+      class="header-nav__button"
+      mat-stroked-button
+      (click)="navigateClick.emit('/categories')"
+      routerLinkActive="active"
+    >
+      <mat-icon>view_list</mat-icon>
+      Каталог товаров
+    </button>
+  </a>
   <div class="search-form-field__wrapper">
     <mat-form-field class="search-form-field" appearance="outline">
       <mat-label>{{ placeholder }}</mat-label>
@@ -48,7 +50,9 @@
         <button mat-raised-button color="primary" (click)="logoutClick.emit()">Выход</button>
       </div>
       <mat-divider class="user__divider"></mat-divider>
-      <button mat-menu-item><mat-icon>favorite</mat-icon> Избранное</button>
+      <button mat-menu-item (click)="navigateClick.emit('/favorites')">
+        <mat-icon>favorite</mat-icon> Избранное
+      </button>
       <button mat-menu-item><mat-icon>pending_actions</mat-icon> Лист ожидания</button>
     </div>
   </mat-menu>
