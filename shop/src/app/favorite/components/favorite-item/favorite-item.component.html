@@ -1,0 +1,18 @@
+<mat-card class="favorite-card" *ngIf="item">
+  <mat-card-header>
+    <mat-card-title>{{ item.name }}</mat-card-title>
+    <mat-card-subtitle>{{ item.price }} р.</mat-card-subtitle>
+  </mat-card-header>
+  <div class="favorite-card__image-wrapper">
+    <img [src]="item.imageUrls[0]" [alt]="item.name + ' photo'" />
+  </div>
+  <mat-card-content>
+    <div class="favorite-card__rating">
+      <mat-icon *ngFor="let star of ratingToStars(item.rating)">star</mat-icon>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="accent">Убрать из избранного</button>
+    <button mat-raised-button color="primary">В корзину</button>
+  </mat-card-actions>
+</mat-card>

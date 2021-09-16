@@ -1,0 +1,7 @@
+<h2>Избранное</h2>
+<div class="favorites__list" *ngIf="favorites">
+  <div class="favorite-card__wrapper" *ngFor="let item of favorites">
+    <app-favorite-item [itemId]="item"></app-favorite-item>
+  </div>
+</div>
+<h3 *ngIf="!favorites">Пусто! Избранных товаров нет.</h3>

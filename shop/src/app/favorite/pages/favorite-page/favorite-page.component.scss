@@ -1,0 +1,12 @@
+.favorite {
+  &s__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &-card__wrapper {
+    width: 45%;
+    margin-bottom: 2rem;
+  }
+}

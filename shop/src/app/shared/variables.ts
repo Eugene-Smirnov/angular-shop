@@ -51,3 +51,12 @@ export const USERS_API_URLS = {
 };
 
 export const LOGIN_DIALOG_ID = 'LOGIN_DIALOG_ID';
+
+export function ratingToStars(rating: number): string[] {
+  if (!rating) return [];
+  const arr = [];
+  for (let i = 0; i < rating; i++) {
+    arr.push('star_rate');
+  }
+  return arr;
+}
