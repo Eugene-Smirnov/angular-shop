@@ -2,8 +2,10 @@
 <div class="favorites__list" *ngIf="favorites">
   <div class="favorite-card__wrapper" *ngFor="let item of favorites">
     <app-favorite-item
-      [itemId]="item"
+      [item]="item"
       (removeClick)="onRemoveClick($event)"
+      (toCartClick)="onToCartClick($event)"
+      (removeFromCartClick)="onRemoveFromCartClick($event)"
       (linkClick)="onLinkClick($event)"
     ></app-favorite-item>
   </div>

@@ -19,6 +19,21 @@
     <button mat-stroked-button color="accent" (click)="removeClick.emit(item.id)">
       Убрать из избранного
     </button>
-    <button mat-raised-button color="primary">В корзину</button>
+    <button
+      mat-raised-button
+      color="primary"
+      *ngIf="!item.isInCart"
+      (click)="toCartClick.emit(item.id)"
+    >
+      В корзину
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      *ngIf="item.isInCart"
+      (click)="removeFromCartClick.emit(item.id)"
+    >
+      Убрать из корзины
+    </button>
   </mat-card-actions>
 </mat-card>
