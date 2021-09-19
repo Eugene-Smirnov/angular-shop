@@ -1,6 +1,10 @@
 <mat-card class="favorite-card" *ngIf="item">
   <mat-card-header>
-    <mat-card-title>{{ item.name }}</mat-card-title>
+    <mat-card-title
+      class="favorite-card__heading"
+      (click)="linkClick.emit('/goods/item/' + item.id)"
+      >{{ item.name }}</mat-card-title
+    >
     <mat-card-subtitle>{{ item.price }} р.</mat-card-subtitle>
   </mat-card-header>
   <div class="favorite-card__image-wrapper">

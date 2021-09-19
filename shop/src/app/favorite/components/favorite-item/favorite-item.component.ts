@@ -14,7 +14,13 @@ export class FavoriteItemComponent implements OnInit {
 
   @Output() removeClick: EventEmitter<string> = new EventEmitter();
 
+  @Output() linkClick: EventEmitter<string> = new EventEmitter();
+
   constructor(private goodsService: GoodsService) {}
+
+  ratingToStars = ratingToStars;
+
+  item: GoodsItemModel | null = null;
 
   ngOnInit(): void {
     this.goodsService
@@ -22,8 +28,4 @@ export class FavoriteItemComponent implements OnInit {
       .pipe(take(1))
       .subscribe((item) => (this.item = item));
   }
-
-  ratingToStars = ratingToStars;
-
-  item: GoodsItemModel | null = null;
 }

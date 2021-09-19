@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./favorite/favorite.module').then((m) => m.FavoriteModule),
   },
+  {
+    path: 'cart',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./cart/cart.module').then((m) => m.CartModule),
+  },
 ];
 
 @NgModule({

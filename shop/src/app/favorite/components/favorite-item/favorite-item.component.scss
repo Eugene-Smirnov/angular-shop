@@ -11,4 +11,11 @@
       max-height: 100%;
     }
   }
+
+  &__heading {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

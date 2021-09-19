@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { loadUserInfo } from 'src/app/redux/actions/user.actions';
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/user/services/user.service';
   styleUrls: ['./favorite-page.component.scss'],
 })
 export class FavoritePageComponent implements OnInit {
-  constructor(private store: Store, private userService: UserService) {}
+  constructor(private store: Store, private userService: UserService, private router: Router) {}
 
   favorites$ = this.store.select(selectFavorites);
 
@@ -38,5 +39,9 @@ export class FavoritePageComponent implements OnInit {
     this.userService.deleteFavorite(itemId).subscribe(() => {
       this.store.dispatch(loadUserInfo());
     });
+  }
+
+  onLinkClick(toPath: string): void {
+    this.router.navigate([toPath]);
   }
 }
