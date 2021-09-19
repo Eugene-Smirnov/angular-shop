@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LoadCategoriesEffect } from '../redux/effects/categories.effects';
 import { HeaderSearchResultsComponent } from './components/header/header-search-results/header-search-results.component';
 import { LoginComponent } from './components/login/login.component';
+import { DialogAuthComponent } from './components/dialog-auth/dialog-auth.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LoginComponent } from './components/login/login.component';
     CategoriesPageComponent,
     HeaderSearchResultsComponent,
     LoginComponent,
+    DialogAuthComponent,
   ],
   imports: [
     CommonModule,
