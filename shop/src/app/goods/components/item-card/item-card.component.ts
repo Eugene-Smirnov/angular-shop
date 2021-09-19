@@ -11,6 +11,10 @@ export class ItemCardComponent implements OnInit {
 
   @Output() headingClick: EventEmitter<string> = new EventEmitter();
 
+  @Output() favoriteClick: EventEmitter<string> = new EventEmitter();
+
+  @Output() removeFavoriteClick: EventEmitter<string> = new EventEmitter();
+
   itemLink = '';
 
   availableClass = 'item-card__available_';

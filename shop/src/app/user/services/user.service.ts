@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMapTo } from 'rxjs/operators';
 import { AUTH_TOKEN_KEY, USERS_API_URLS } from 'src/app/shared/variables';
 import { UserInfoModel } from '../models/user-info.model';
 import { OrderModel } from '../models/order.model';
@@ -56,12 +56,18 @@ export class UserService {
     );
   }
 
-  addFavorite(itemId: string): void {
-    this.http.post(USERS_API_URLS.FAVORITES, { id: itemId });
+  addFavorite(itemId: string): Observable<boolean> {
+    return this.http.post(USERS_API_URLS.FAVORITES, { id: itemId }).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 
-  deleteFavorite(itemId: string): void {
-    this.http.delete(USERS_API_URLS.FAVORITES_DEL + itemId);
+  deleteFavorite(itemId: string): Observable<boolean> {
+    return this.http.delete(USERS_API_URLS.FAVORITES_DEL + itemId).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 
   addToCart(itemId: string): void {

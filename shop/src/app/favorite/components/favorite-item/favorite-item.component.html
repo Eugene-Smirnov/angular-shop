@@ -12,7 +12,9 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-stroked-button color="accent">Убрать из избранного</button>
+    <button mat-stroked-button color="accent" (click)="removeClick.emit(item.id)">
+      Убрать из избранного
+    </button>
     <button mat-raised-button color="primary">В корзину</button>
   </mat-card-actions>
 </mat-card>

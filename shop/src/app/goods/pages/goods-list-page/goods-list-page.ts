@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DialogAuthComponent } from 'src/app/core/components/dialog-auth/dialog-auth.component';
 import { CategoryModel } from 'src/app/core/models/category.model';
 import {
   addPage,
@@ -10,12 +12,15 @@ import {
   loadSubCategoryGoods,
   resetGoods,
 } from 'src/app/redux/actions/goods.actions';
+import { loadUserInfo } from 'src/app/redux/actions/user.actions';
 import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
 import {
-  selectGoods,
+  selectGoodsFav,
   selectLastItemIndex,
   selectIsNotLastPage,
 } from 'src/app/redux/selectors/goods.selector';
+import { selectUserIsLogged } from 'src/app/redux/selectors/user.selector';
+import { UserService } from 'src/app/user/services/user.service';
 import { BreadcrumbModel } from '../../models/breadcrumb.model';
 import { GoodsItemModel } from '../../models/goods-item.model';
 
@@ -25,7 +30,13 @@ import { GoodsItemModel } from '../../models/goods-item.model';
   styleUrls: ['./goods-list-page.scss'],
 })
 export class GoodsListPageComponent implements OnInit, OnDestroy {
-  constructor(private route: ActivatedRoute, private store: Store, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+    private router: Router,
+    public dialog: MatDialog,
+    private userService: UserService,
+  ) {}
 
   private subscriptions: Subscription = new Subscription();
 
@@ -35,13 +46,15 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
   categories$: Observable<CategoryModel[]> = this.store.select(selectCategories);
 
-  goods$: Observable<GoodsItemModel[]> = this.store.select(selectGoods);
+  goods$: Observable<GoodsItemModel[]> = this.store.select(selectGoodsFav);
 
   lastItemIndex$: Observable<number> = this.store.select(selectLastItemIndex);
 
   lastItemIndex: number = 0;
 
   isNotLastPage$: Observable<boolean> = this.store.select(selectIsNotLastPage);
+
+  isUserLogged: boolean = false;
 
   ngOnInit(): void {
     const ids$ = this.route.params.pipe(
@@ -106,6 +119,10 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions.add(this.lastItemIndex$.subscribe((index) => (this.lastItemIndex = index)));
+
+    this.subscriptions.add(
+      this.store.select(selectUserIsLogged).subscribe((value) => (this.isUserLogged = value)),
+    );
   }
 
   ngOnDestroy(): void {
@@ -138,5 +155,29 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
         loadCategoryGoods({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
       );
     }
+  }
+
+  onFavoriteClick(itemId: string): void {
+    if (this.isUserLogged) {
+      this.userService.addFavorite(itemId).subscribe((value) => {
+        if (value) {
+          this.store.dispatch(loadUserInfo());
+          return;
+        }
+        this.dialog.open(DialogAuthComponent);
+      });
+      return;
+    }
+    this.dialog.open(DialogAuthComponent);
+  }
+
+  onRemoveFavClick(itemId: string): void {
+    this.userService.deleteFavorite(itemId).subscribe((value) => {
+      if (value) {
+        this.store.dispatch(loadUserInfo());
+        return;
+      }
+      this.dialog.open(DialogAuthComponent);
+    });
   }
 }

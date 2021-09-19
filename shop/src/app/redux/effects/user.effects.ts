@@ -21,7 +21,6 @@ export class UserInfoEffects {
         this.userService.getUserInfo().pipe(
           map((loadedInfo) => {
             if (loadedInfo) return userInfoLoadedSuccess({ loadedInfo });
-            console.log('selector work');
             return userInfoLoadFailure();
           }),
           catchError(() => EMPTY),

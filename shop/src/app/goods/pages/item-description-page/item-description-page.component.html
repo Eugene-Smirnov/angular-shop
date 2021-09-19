@@ -18,8 +18,19 @@
     mat-button
     class="description-page__button description-page__button_to-favorite"
     color="accent"
+    *ngIf="!item?.isFavorite"
+    (click)="onFavoriteClick()"
   >
     В избранное
+  </button>
+  <button
+    mat-button
+    class="description-page__button description-page__button_to-favorite"
+    color="accent"
+    *ngIf="item?.isFavorite"
+    (click)="onRemoveFavClick()"
+  >
+    Убрать из избранного
   </button>
 </div>
 <div class="description-page__info">

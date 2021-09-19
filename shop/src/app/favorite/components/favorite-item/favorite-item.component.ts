@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { GoodsItemModel } from 'src/app/goods/models/goods-item.model';
 import { GoodsService } from 'src/app/goods/services/goods.service';
@@ -11,6 +11,8 @@ import { ratingToStars } from 'src/app/shared/variables';
 })
 export class FavoriteItemComponent implements OnInit {
   @Input() itemId: string = '';
+
+  @Output() removeClick: EventEmitter<string> = new EventEmitter();
 
   constructor(private goodsService: GoodsService) {}
 

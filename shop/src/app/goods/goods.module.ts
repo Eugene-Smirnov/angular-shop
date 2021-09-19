@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ItemDescriptionPageComponent } from './pages/item-description-page/item-description-page.component';
+import { CoreModule } from '../core/core.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { ItemDescriptionPageComponent } from './pages/item-description-page/item
   ],
   imports: [
     CommonModule,
+    CoreModule,
     GoodsRoutingModule,
     StoreModule.forFeature(fromGoodsReducer.goodsFeatureKey, fromGoodsReducer.goodsReducer),
     EffectsModule.forFeature([LoadCategoryGoodsEffect, LoadSubCategoryGoodsEffect]),
     MatButtonModule,
     MatDividerModule,
     MatBadgeModule,
+    MatDialogModule,
   ],
   providers: [GoodsService],
 })

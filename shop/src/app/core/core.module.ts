@@ -56,6 +56,6 @@ import { DialogAuthComponent } from './components/dialog-auth/dialog-auth.compon
     EffectsModule.forFeature([LoadCategoriesEffect]),
   ],
   providers: [CategoryService],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, DialogAuthComponent],
 })
 export class CoreModule {}

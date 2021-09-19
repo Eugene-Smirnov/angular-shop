@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { loadUserInfo } from 'src/app/redux/actions/user.actions';
 import { selectFavorites } from 'src/app/redux/selectors/user.selector';
-
-const TEST_FAVS = [
-  '612e05c5924cfcce7c08e41c',
-  '612e849095c849059d7b3983',
-  '612fe4ecf68b66736021e152',
-];
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-favorite-page',
@@ -15,7 +11,7 @@ const TEST_FAVS = [
   styleUrls: ['./favorite-page.component.scss'],
 })
 export class FavoritePageComponent implements OnInit {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private userService: UserService) {}
 
   favorites$ = this.store.select(selectFavorites);
 
@@ -29,13 +25,18 @@ export class FavoritePageComponent implements OnInit {
     this.subscriptions.add(
       this.favorites$.subscribe((favorites) => {
         if (!favorites || !favorites[0]) {
-          this.favorites = TEST_FAVS;
-          this.cols = Math.ceil(this.favorites.length / 2);
-          console.log(this.cols);
+          this.favorites = [];
           return;
         }
         this.favorites = favorites;
+        this.cols = Math.ceil(this.favorites.length / 2);
       }),
     );
+  }
+
+  onRemoveClick(itemId: string): void {
+    this.userService.deleteFavorite(itemId).subscribe(() => {
+      this.store.dispatch(loadUserInfo());
+    });
   }
 }

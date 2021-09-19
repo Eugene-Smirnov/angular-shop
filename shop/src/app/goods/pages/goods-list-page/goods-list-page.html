@@ -5,7 +5,12 @@
 <h2>{{ headingName }}</h2>
 <div class="card" *ngFor="let item of goods$ | async">
   <mat-divider></mat-divider>
-  <app-item-card [item]="item" (headingClick)="onLinkClick($event)"></app-item-card>
+  <app-item-card
+    [item]="item"
+    (headingClick)="onLinkClick($event)"
+    (favoriteClick)="onFavoriteClick($event)"
+    (removeFavoriteClick)="onRemoveFavClick($event)"
+  ></app-item-card>
 </div>
 <button mat-raised-button *ngIf="isNotLastPage$ | async" color="accent" (click)="onMoreClick()">
   Показать больше

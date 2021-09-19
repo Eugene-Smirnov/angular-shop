@@ -21,8 +21,23 @@
       >
         В корзину
       </button>
-      <button mat-button class="item-card__button item-card__button_to-favorite" color="accent">
+      <button
+        *ngIf="!item.isFavorite"
+        mat-button
+        class="item-card__button item-card__button_to-favorite"
+        color="accent"
+        (click)="favoriteClick.emit(item.id)"
+      >
         В избранное
+      </button>
+      <button
+        *ngIf="item.isFavorite"
+        mat-button
+        class="item-card__button item-card__button_from-favorite"
+        color="accent"
+        (click)="removeFavoriteClick.emit(item.id)"
+      >
+        Убрать из избранного
       </button>
     </div>
   </div>
