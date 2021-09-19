@@ -70,23 +70,38 @@ export class UserService {
     );
   }
 
-  addToCart(itemId: string): void {
-    this.http.post(USERS_API_URLS.CART, { id: itemId });
+  addToCart(itemId: string): Observable<boolean> {
+    return this.http.post(USERS_API_URLS.CART, { id: itemId }).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 
-  deleteFromCart(itemId: string): void {
-    this.http.delete(USERS_API_URLS.CART_DEL + itemId);
+  deleteFromCart(itemId: string): Observable<boolean> {
+    return this.http.delete(USERS_API_URLS.CART_DEL + itemId).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 
-  addOrder(order: OrderModel): void {
-    this.http.post(USERS_API_URLS.ORDER, { ...order });
+  addOrder(order: OrderModel): Observable<boolean> {
+    return this.http.post(USERS_API_URLS.ORDER, { ...order }).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 
-  editOrder(order: OrderModel, orderId: string): void {
-    this.http.put(USERS_API_URLS.ORDER, { ...order, id: orderId });
+  editOrder(order: OrderModel, orderId: string): Observable<boolean> {
+    return this.http.put(USERS_API_URLS.ORDER, { ...order, id: orderId }).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 
-  deleteOrder(orderId: string): void {
-    this.http.delete(USERS_API_URLS.ORDER_DEL + orderId);
+  deleteOrder(orderId: string): Observable<boolean> {
+    return this.http.delete(USERS_API_URLS.ORDER_DEL + orderId).pipe(
+      switchMapTo(of(true)),
+      catchError(() => of(false)),
+    );
   }
 }

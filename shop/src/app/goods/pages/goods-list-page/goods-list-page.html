@@ -10,6 +10,8 @@
     (headingClick)="onLinkClick($event)"
     (favoriteClick)="onFavoriteClick($event)"
     (removeFavoriteClick)="onRemoveFavClick($event)"
+    (toCartClick)="onToCartClick($event)"
+    (removeFromCartClick)="onRemoveFromCartClick($event)"
   ></app-item-card>
 </div>
 <button mat-raised-button *ngIf="isNotLastPage$ | async" color="accent" (click)="onMoreClick()">

@@ -8,7 +8,11 @@ import { DialogAuthComponent } from 'src/app/core/components/dialog-auth/dialog-
 import { CategoryModel } from 'src/app/core/models/category.model';
 import { loadUserInfo } from 'src/app/redux/actions/user.actions';
 import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
-import { selectFavorites, selectUserIsLogged } from 'src/app/redux/selectors/user.selector';
+import {
+  selectCart,
+  selectFavorites,
+  selectUserIsLogged,
+} from 'src/app/redux/selectors/user.selector';
 import { UserService } from 'src/app/user/services/user.service';
 import { BreadcrumbModel } from '../../models/breadcrumb.model';
 import { GoodsItemModel } from '../../models/goods-item.model';
@@ -44,6 +48,14 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
               }),
             );
           }),
+          switchMap((item) => {
+            return this.cart$.pipe(
+              map((cart) => {
+                if (!cart) return item;
+                return { ...item, isInCart: cart.includes(item.id) };
+              }),
+            );
+          }),
         )
         .subscribe((item) => {
           this.item = item;
@@ -59,6 +71,8 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
   item: GoodsItemModel | undefined;
 
   favorites$ = this.store.select(selectFavorites);
+
+  cart$ = this.store.select(selectCart);
 
   rating: string = '0/5';
 
@@ -134,6 +148,32 @@ export class ItemDescriptionPageComponent implements OnInit, OnDestroy {
   onRemoveFavClick(): void {
     if (!this.item?.id) return;
     this.userService.deleteFavorite(this.item.id).subscribe((value) => {
+      if (value) {
+        this.store.dispatch(loadUserInfo());
+        return;
+      }
+      this.dialog.open(DialogAuthComponent);
+    });
+  }
+
+  onToCartClick(): void {
+    if (!this.item?.id) return;
+    if (this.isUserLogged) {
+      this.userService.addToCart(this.item.id).subscribe((value) => {
+        if (value) {
+          this.store.dispatch(loadUserInfo());
+          return;
+        }
+        this.dialog.open(DialogAuthComponent);
+      });
+      return;
+    }
+    this.dialog.open(DialogAuthComponent);
+  }
+
+  onRemoveFromCartClick(): void {
+    if (!this.item?.id) return;
+    this.userService.deleteFromCart(this.item.id).subscribe((value) => {
       if (value) {
         this.store.dispatch(loadUserInfo());
         return;

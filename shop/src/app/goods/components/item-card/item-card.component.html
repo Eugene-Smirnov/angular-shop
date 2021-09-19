@@ -15,11 +15,22 @@
     <p class="item-card__rating">Рейтинг: {{ item.rating }}/5</p>
     <div class="item-card__buttons">
       <button
+        *ngIf="!item.isInCart"
         mat-stroked-button
         class="item-card__button item-card__button_to-cart"
         color="primary"
+        (click)="toCartClick.emit(item.id)"
       >
         В корзину
+      </button>
+      <button
+        *ngIf="item.isInCart"
+        mat-stroked-button
+        class="item-card__button item-card__button_to-cart"
+        color="primary"
+        (click)="removeFromCartClick.emit(item.id)"
+      >
+        Убрать из корзины
       </button>
       <button
         *ngIf="!item.isFavorite"

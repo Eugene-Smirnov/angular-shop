@@ -9,3 +9,5 @@ export const selectUserInfo = createSelector(selectUserState, (state) => state.i
 export const selectUserIsLogged = createSelector(selectUserInfo, (info) => !!info);
 
 export const selectFavorites = createSelector(selectUserInfo, (info) => info?.favorites || null);
+
+export const selectCart = createSelector(selectUserInfo, (info) => info?.cart || null);

@@ -15,7 +15,7 @@ import {
 import { loadUserInfo } from 'src/app/redux/actions/user.actions';
 import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
 import {
-  selectGoodsFav,
+  selectUserPipedGoods,
   selectLastItemIndex,
   selectIsNotLastPage,
 } from 'src/app/redux/selectors/goods.selector';
@@ -46,13 +46,15 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
   categories$: Observable<CategoryModel[]> = this.store.select(selectCategories);
 
-  goods$: Observable<GoodsItemModel[]> = this.store.select(selectGoodsFav);
+  goods$: Observable<GoodsItemModel[]> = this.store.select(selectUserPipedGoods);
 
   lastItemIndex$: Observable<number> = this.store.select(selectLastItemIndex);
 
   lastItemIndex: number = 0;
 
   isNotLastPage$: Observable<boolean> = this.store.select(selectIsNotLastPage);
+
+  isUserLogged$: Observable<boolean> = this.store.select(selectUserIsLogged);
 
   isUserLogged: boolean = false;
 
@@ -120,9 +122,7 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.lastItemIndex$.subscribe((index) => (this.lastItemIndex = index)));
 
-    this.subscriptions.add(
-      this.store.select(selectUserIsLogged).subscribe((value) => (this.isUserLogged = value)),
-    );
+    this.subscriptions.add(this.isUserLogged$.subscribe((value) => (this.isUserLogged = value)));
   }
 
   ngOnDestroy(): void {
@@ -173,6 +173,30 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
   onRemoveFavClick(itemId: string): void {
     this.userService.deleteFavorite(itemId).subscribe((value) => {
+      if (value) {
+        this.store.dispatch(loadUserInfo());
+        return;
+      }
+      this.dialog.open(DialogAuthComponent);
+    });
+  }
+
+  onToCartClick(itemId: string): void {
+    if (this.isUserLogged) {
+      this.userService.addToCart(itemId).subscribe((value) => {
+        if (value) {
+          this.store.dispatch(loadUserInfo());
+          return;
+        }
+        this.dialog.open(DialogAuthComponent);
+      });
+      return;
+    }
+    this.dialog.open(DialogAuthComponent);
+  }
+
+  onRemoveFromCartClick(itemId: string): void {
+    this.userService.deleteFromCart(itemId).subscribe((value) => {
       if (value) {
         this.store.dispatch(loadUserInfo());
         return;

@@ -11,8 +11,19 @@
     mat-stroked-button
     class="description-page__button description-page__button_to-cart"
     color="primary"
+    *ngIf="!item?.isInCart"
+    (click)="onToCartClick()"
   >
     В корзину
+  </button>
+  <button
+    mat-stroked-button
+    class="description-page__button description-page__button_to-cart"
+    color="primary"
+    *ngIf="item?.isInCart"
+    (click)="onRemoveFromCartClick()"
+  >
+    Убрать из корзины
   </button>
   <button
     mat-button
