@@ -1,1 +1,12 @@
-<p>cart-page works!</p>
+<h2>Корзина</h2>
+<div class="cart__order-form">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Детали заказа </mat-panel-title>
+      <mat-panel-description>
+        {{ panelOpenState ? '' : 'закрыта' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-cart-form></app-cart-form>
+  </mat-expansion-panel>
+</div>

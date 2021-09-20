@@ -20,6 +20,8 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
   subscriptions = new Subscription();
 
+  panelOpenState = false;
+
   ngOnInit(): void {
     this.subscriptions.add(
       this.cart$.subscribe((cart) => {

@@ -10,6 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './user/interceptors/auth.interceptor';
 import { UserModule } from './user/user.module';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,7 @@ import { UserModule } from './user/user.module';
     HttpClientModule,
     CoreModule,
     UserModule,
+    MatMomentDateModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
@@ -29,6 +32,7 @@ import { UserModule } from './user/user.module';
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },
   ],
   bootstrap: [AppComponent],
 })
