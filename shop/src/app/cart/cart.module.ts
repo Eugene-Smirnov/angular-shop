@@ -16,9 +16,17 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
+import { CartConfirmDialogComponent } from './components/cart-confirm-dialog/cart-confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [CartPageComponent, CartItemComponent, CartFormComponent, PhoneMaskDirective],
+  declarations: [
+    CartPageComponent,
+    CartItemComponent,
+    CartFormComponent,
+    PhoneMaskDirective,
+    CartConfirmDialogComponent,
+  ],
   imports: [
     CommonModule,
     CartRoutingModule,
@@ -31,6 +39,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     MatInputModule,
     MatDividerModule,
     MatSelectModule,
+    MatDialogModule,
     ReactiveFormsModule,
   ],
 })

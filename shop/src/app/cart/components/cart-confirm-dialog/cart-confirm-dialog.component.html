@@ -1,0 +1,30 @@
+<h1 mat-dialog-title color="warn">Подтвердите ваш заказ:</h1>
+<mat-dialog-content mat-dialog-content *ngIf="order">
+  <h2>Информация о покупателе:</h2>
+  <ul>
+    <li>ФИО - {{ order.details.name }}</li>
+    <li>Адрес доставки - {{ order.details.address }}</li>
+    <li>Контактный телефон - {{ order.details.phone }}</li>
+    <li>Дата доставки - {{ order.details.timeToDeliver | date: 'dd.MM.y' }}</li>
+    <li>Ориентировочное время доставки - {{ order.details.timeToDeliver | date: 'HH:mm' }}</li>
+    <li>Комментарий - {{ order.details.comment }}</li>
+  </ul>
+  <h2>Информация о товарах:</h2>
+  <ul>
+    <div *ngFor="let cartItem of order.items">
+      <h3>{{ cartItem.name }}</h3>
+      <div class="">
+        <p>Цена - {{ cartItem.price }}</p>
+        <p>Количество - {{ cartItem.amount }}</p>
+        <mat-divider vertical></mat-divider>
+        <p>Итого - {{ cartItem.getTotalPrice() }}</p>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </ul>
+  <h3>Сумма заказа: {{ getOrderPrice() }}</h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button color="warn" mat-dialog-close>Отмена</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">Подтвердить</button>
+</mat-dialog-actions>

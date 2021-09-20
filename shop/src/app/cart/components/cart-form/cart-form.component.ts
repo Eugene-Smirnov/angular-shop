@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Moment } from 'moment';
+import { OrderDetailsModel } from '../../models/order-details.model';
 
 @Component({
   selector: 'app-cart-form',
@@ -7,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./cart-form.component.scss'],
 })
 export class CartFormComponent {
+  @Output() formSubmit: EventEmitter<OrderDetailsModel> = new EventEmitter();
+
   constructor() {
     this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
   }
@@ -91,6 +95,25 @@ export class CartFormComponent {
   }
 
   onSubmit(): void {
-    console.log(this.cartForm.value);
+    const date = (this.date.value as Moment).toDate();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+
+    const formResult: OrderDetailsModel = {
+      name: `${this.lastName.value} ${this.firstName.value} ${this.fathersName.value}`,
+      address: `${this.address.value}`,
+      phone: `+375 ${this.phone.value}`,
+      timeToDeliver: new Date(
+        year,
+        month,
+        day,
+        this.timeHours.value,
+        this.timeMinutes.value,
+      ).toString(),
+      comment: this.comment.value,
+    };
+
+    this.formSubmit.emit(formResult);
   }
 }
