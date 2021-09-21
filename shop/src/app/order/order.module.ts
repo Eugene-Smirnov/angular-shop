@@ -1,35 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { CartRoutingModule } from './cart-routing.module';
-import { CartPageComponent } from './pages/cart-page/cart-page.component';
-import { CartItemComponent } from './components/cart-item/cart-item.component';
-
+import { OrderRoutingModule } from './order-routing.module';
+import { OrderPageComponent } from './pages/order-page/order-page.component';
+import { OrderComponent } from './components/order/order.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { OrderChangeFormComponent } from './components/order-change-form/order-change-form.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CartFormComponent } from './components/cart-form/cart-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { CartConfirmDialogComponent } from './components/cart-confirm-dialog/cart-confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { OrderDeleteDialogComponent } from './components/order-delete-dialog/order-delete-dialog.component';
 
 @NgModule({
-  declarations: [
-    CartPageComponent,
-    CartItemComponent,
-    CartFormComponent,
-    CartConfirmDialogComponent,
-  ],
+  declarations: [OrderPageComponent, OrderComponent, OrderItemComponent, OrderChangeFormComponent, OrderDeleteDialogComponent],
   imports: [
     CommonModule,
     SharedModule,
-    CartRoutingModule,
+    OrderRoutingModule,
     MatExpansionModule,
     FormsModule,
     MatDatepickerModule,
@@ -41,6 +36,7 @@ import { SharedModule } from '../shared/shared.module';
     MatSelectModule,
     MatDialogModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
 })
-export class CartModule {}
+export class OrderModule {}

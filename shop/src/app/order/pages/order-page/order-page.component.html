@@ -1,0 +1,10 @@
+<h2>Ожидаемые заказы</h2>
+<div class="orders-page__content" *ngIf="orders[0]">
+  <app-order
+    *ngFor="let order of orders"
+    [order]="order"
+    (formSubmit)="onFormSubmit($event)"
+    (orderDelete)="onOrderDelete($event)"
+  ></app-order>
+</div>
+<h3 *ngIf="!orders[0]">Пусто! В данный момент заказов нет.</h3>

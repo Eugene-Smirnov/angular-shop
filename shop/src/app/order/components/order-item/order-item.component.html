@@ -1,0 +1,14 @@
+<div class="order-item">
+  <div class="order-item__image">
+    <img [src]="item.imageUrls[0]" [alt]="item.name + ' image'" />
+  </div>
+  <div class="order-item__info">
+    <p class="order-item__name" [routerLink]="'/goods/item/' + item.id">{{ item.name }}</p>
+    <p>Цена: {{ item.price }} р.</p>
+    <p>Количество: {{ item.amount }}</p>
+    <p>
+      <b>Итого: {{ item.getTotalPrice() }} р.</b>
+    </p>
+  </div>
+</div>
+<mat-divider></mat-divider>

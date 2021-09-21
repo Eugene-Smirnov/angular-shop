@@ -11,3 +11,5 @@ export const selectUserIsLogged = createSelector(selectUserInfo, (info) => !!inf
 export const selectFavorites = createSelector(selectUserInfo, (info) => info?.favorites || null);
 
 export const selectCart = createSelector(selectUserInfo, (info) => info?.cart || null);
+
+export const selectOrders = createSelector(selectUserInfo, (info) => info?.orders || null);

@@ -53,7 +53,9 @@
       <button mat-menu-item (click)="navigateClick.emit('/favorites')">
         <mat-icon>favorite</mat-icon> Избранное
       </button>
-      <button mat-menu-item><mat-icon>pending_actions</mat-icon> Лист ожидания</button>
+      <button mat-menu-item (click)="navigateClick.emit('/orders')">
+        <mat-icon>pending_actions</mat-icon> Лист ожидания
+      </button>
     </div>
   </mat-menu>
   <button class="header-nav__button" mat-stroked-button (click)="navigateClick.emit('/cart')">

@@ -1,0 +1,105 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="orderEditForm">
+  <mat-form-field appearance="fill" class="order-edit-form__input">
+    <mat-label>ФИО</mat-label>
+    <input form="orderEditForm" required matInput formControlName="name" type="text" />
+    <mat-error *ngIf="name.errors?.required"> Заполните поле </mat-error>
+    <mat-error *ngIf="name.errors?.minlength && !name.errors?.required">
+      Мин. длина - 3 символа
+    </mat-error>
+    <mat-error *ngIf="name.errors?.maxlength"> Макс. длина - 50 символов </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="order-edit-form__input">
+    <mat-label>Адрес доставки</mat-label>
+    <input form="orderEditForm" required matInput type="text" formControlName="address" />
+    <mat-error *ngIf="address.errors?.required"> Заполните поле </mat-error>
+    <mat-error *ngIf="address.errors?.minlength && !address.errors?.required">
+      Мин. длина - 3 символа
+    </mat-error>
+    <mat-error *ngIf="address.errors?.maxlength"> Макс. длина - 250 символов </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Комментарий к заказу</mat-label>
+    <textarea form="orderEditForm" matInput formControlName="comment"></textarea>
+    <mat-error *ngIf="comment.errors?.maxlength"> Макс. длина - 250 символов </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Дата доставки</mat-label>
+    <input
+      matInput
+      [min]="minDate"
+      [max]="maxDate"
+      [matDatepicker]="picker"
+      formControlName="date"
+      (click)="picker.open()"
+    />
+    <mat-error *ngIf="date.errors?.required"> Заполните поле </mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="order-edit-form__input">
+    <mat-label>Час</mat-label>
+    <mat-select formControlName="timeHours">
+      <mat-option value="08">08</mat-option>
+      <mat-option value="09">09</mat-option>
+      <mat-option value="10">10</mat-option>
+      <mat-option value="11">11</mat-option>
+      <mat-option value="12">12</mat-option>
+      <mat-option value="13">13</mat-option>
+      <mat-option value="14">14</mat-option>
+      <mat-option value="15">15</mat-option>
+      <mat-option value="16">16</mat-option>
+      <mat-option value="17">17</mat-option>
+      <mat-option value="18">18</mat-option>
+      <mat-option value="19">19</mat-option>
+      <mat-option value="20">20</mat-option>
+      <mat-option value="21">21</mat-option>
+    </mat-select>
+    <mat-error *ngIf="timeHours.errors?.required"> Заполните поле </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="order-edit-form__input">
+    <mat-label>Минута</mat-label>
+    <mat-select formControlName="timeMinutes">
+      <mat-option value="00">00</mat-option>
+      <mat-option value="05">05</mat-option>
+      <mat-option value="10">10</mat-option>
+      <mat-option value="15">15</mat-option>
+      <mat-option value="20">20</mat-option>
+      <mat-option value="25">25</mat-option>
+      <mat-option value="30">30</mat-option>
+      <mat-option value="35">35</mat-option>
+      <mat-option value="40">40</mat-option>
+      <mat-option value="45">45</mat-option>
+      <mat-option value="50">50</mat-option>
+      <mat-option value="55">55</mat-option>
+    </mat-select>
+    <mat-error *ngIf="timeMinutes.errors?.required"> Заполните поле </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Телефон</mat-label>
+    <span matPrefix>+375 &nbsp;</span>
+    <input
+      form="orderEditForm"
+      required
+      appPhoneMask
+      type="tel"
+      matInput
+      placeholder="(XX)-XXX-XX-XX"
+      formControlName="phone"
+    />
+    <mat-icon matSuffix>mode_edit</mat-icon>
+    <mat-error *ngIf="phone.errors?.required"> Заполните поле </mat-error>
+  </mat-form-field>
+
+  <div class="form-row">
+    <button mat-stroked-button color="warn" (click)="closeForm.emit()">Отмена</button>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!orderEditForm.valid">
+      Сохранить
+    </button>
+  </div>
+</form>
