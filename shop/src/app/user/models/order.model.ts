@@ -1,15 +1,5 @@
-export interface OrderModel {
-  items: {
-    id: string;
-    amount: number;
-  }[];
+import { OrderAddingModel } from './order.adding.model';
 
-  details: {
-    name: string;
-    address: string;
-    phone: string;
-    timeToDeliver: string;
-    comment: string;
-  };
+export interface OrderModel extends OrderAddingModel {
   id: string;
 }

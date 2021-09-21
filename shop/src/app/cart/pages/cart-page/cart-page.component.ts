@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { forkJoin, of, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, switchMapTo } from 'rxjs/operators';
 import { GoodsService } from 'src/app/goods/services/goods.service';
 import { loadUserInfo } from 'src/app/redux/actions/user.actions';
 import { selectCart } from 'src/app/redux/selectors/user.selector';
@@ -107,6 +107,31 @@ export class CartPageComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(CartConfirmDialogComponent, {
       data: { order: orderPreview },
     });
-    dialogRef.afterClosed().subscribe(console.log);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.addOrder(orderPreview);
+    });
+  }
+
+  addOrder(orderPreview: OrderPreviewModel): void {
+    this.userService
+      .addOrder({
+        items: orderPreview.items.map(({ id, amount }) => {
+          return { id, amount };
+        }),
+
+        details: { ...orderPreview.details },
+      })
+      .pipe(
+        switchMapTo(
+          of(orderPreview.items).pipe(
+            switchMap((items) => {
+              return forkJoin(items.map(({ id }) => this.userService.deleteFromCart(id)));
+            }),
+          ),
+        ),
+      )
+      .subscribe(() => {
+        this.router.navigate(['/orders']);
+      });
   }
 }

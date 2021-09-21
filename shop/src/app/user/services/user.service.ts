@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMapTo } from 'rxjs/operators';
 import { AUTH_TOKEN_KEY, USERS_API_URLS } from 'src/app/shared/variables';
 import { UserInfoModel } from '../models/user-info.model';
-import { OrderModel } from '../models/order.model';
+import { OrderAddingModel } from '../models/order.adding.model';
 
 @Injectable({
   providedIn: 'root',
@@ -84,14 +84,14 @@ export class UserService {
     );
   }
 
-  addOrder(order: OrderModel): Observable<boolean> {
+  addOrder(order: OrderAddingModel): Observable<boolean> {
     return this.http.post(USERS_API_URLS.ORDER, { ...order }).pipe(
       switchMapTo(of(true)),
       catchError(() => of(false)),
     );
   }
 
-  editOrder(order: OrderModel, orderId: string): Observable<boolean> {
+  editOrder(order: OrderAddingModel, orderId: string): Observable<boolean> {
     return this.http.put(USERS_API_URLS.ORDER, { ...order, id: orderId }).pipe(
       switchMapTo(of(true)),
       catchError(() => of(false)),
