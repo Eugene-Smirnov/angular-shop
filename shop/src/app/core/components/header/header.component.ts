@@ -1,4 +1,3 @@
-/* eslint-disable ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -38,7 +37,9 @@ export class HeaderComponent implements OnInit {
   searchGoods: GoodsItemModel[] = [];
 
   ngOnInit() {
+    // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
     this.store.dispatch(loadUserInfo());
+    // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
     this.store.dispatch(loadCategories());
   }
 

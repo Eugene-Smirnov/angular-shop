@@ -7,22 +7,20 @@ import { map } from 'rxjs/operators';
 import { DialogAuthComponent } from 'src/app/core/components/dialog-auth/dialog-auth.component';
 import { CategoryModel } from 'src/app/core/models/category.model';
 import {
-  addPage,
-  loadCategoryGoods,
-  loadSubCategoryGoods,
+  addCategoryPage,
+  addSubCategoryPage,
+  resetCategory,
   resetGoods,
+  resetSubCategory,
 } from 'src/app/redux/actions/goods.actions';
 import { loadUserInfo } from 'src/app/redux/actions/user.actions';
 import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
-import {
-  selectUserPipedGoods,
-  selectLastItemIndex,
-  selectIsNotLastPage,
-} from 'src/app/redux/selectors/goods.selector';
+import { selectUserPipedGoods, selectIsNotLastPage } from 'src/app/redux/selectors/goods.selector';
 import { selectUserIsLogged } from 'src/app/redux/selectors/user.selector';
 import { UserService } from 'src/app/user/services/user.service';
 import { BreadcrumbModel } from '../../models/breadcrumb.model';
 import { GoodsItemModel } from '../../models/goods-item.model';
+import { GoodsService } from '../../services/goods.service';
 
 @Component({
   selector: 'app-category-page',
@@ -36,6 +34,7 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
     private router: Router,
     public dialog: MatDialog,
     private userService: UserService,
+    private goodsService: GoodsService,
   ) {}
 
   private subscriptions: Subscription = new Subscription();
@@ -44,11 +43,13 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
 
   breadcrumbs: BreadcrumbModel[] = [];
 
+  sortBy = this.goodsService.getSortBy();
+
+  reverse = this.goodsService.getReverse();
+
   categories$: Observable<CategoryModel[]> = this.store.select(selectCategories);
 
   goods$: Observable<GoodsItemModel[]> = this.store.select(selectUserPipedGoods);
-
-  lastItemIndex$: Observable<number> = this.store.select(selectLastItemIndex);
 
   lastItemIndex: number = 0;
 
@@ -59,6 +60,7 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
   isUserLogged: boolean = false;
 
   ngOnInit(): void {
+    this.goodsService.resetSettings();
     const ids$ = this.route.params.pipe(
       map((params) => {
         return {
@@ -74,11 +76,8 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
       this.subscriptions.unsubscribe();
 
       if (routerSubCategoryId) {
-        // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
-        this.store.dispatch(resetGoods());
-        // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
         this.store.dispatch(
-          loadSubCategoryGoods({
+          resetSubCategory({
             categoryId: routerCategoryId,
             subCategoryId: routerSubCategoryId,
             fromIndex: this.lastItemIndex,
@@ -104,11 +103,8 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
           }),
         );
       } else {
-        // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
-        this.store.dispatch(resetGoods());
-        // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
         this.store.dispatch(
-          loadCategoryGoods({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
+          resetCategory({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
         );
 
         this.subscriptions.add(
@@ -120,12 +116,11 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subscriptions.add(this.lastItemIndex$.subscribe((index) => (this.lastItemIndex = index)));
-
     this.subscriptions.add(this.isUserLogged$.subscribe((value) => (this.isUserLogged = value)));
   }
 
   ngOnDestroy(): void {
+    this.goodsService.resetSettings();
     this.subscriptions.unsubscribe();
     this.store.dispatch(resetGoods());
   }
@@ -138,13 +133,11 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
     const routerCategoryId = this.route.snapshot.params.categoryId;
     const routerSubCategoryId = this.route.snapshot.params.subCategoryId;
 
-    // TODO: create one action for next lines
-    // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
-    this.store.dispatch(addPage());
+    this.lastItemIndex += 10;
+
     if (routerSubCategoryId) {
-      // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
       this.store.dispatch(
-        loadSubCategoryGoods({
+        addSubCategoryPage({
           categoryId: routerCategoryId,
           subCategoryId: routerSubCategoryId,
           fromIndex: this.lastItemIndex,
@@ -152,7 +145,7 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
       );
     } else {
       this.store.dispatch(
-        loadCategoryGoods({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
+        addCategoryPage({ categoryId: routerCategoryId, fromIndex: this.lastItemIndex }),
       );
     }
   }
@@ -203,5 +196,37 @@ export class GoodsListPageComponent implements OnInit, OnDestroy {
       }
       this.dialog.open(DialogAuthComponent);
     });
+  }
+
+  onSortByClick(value: 'price' | 'rating'): void {
+    if (this.sortBy === value) {
+      if (this.reverse) {
+        this.goodsService.resetSettings();
+      } else {
+        this.goodsService.setReverse(true);
+      }
+    } else {
+      this.goodsService.resetSettings();
+      this.goodsService.setSortBy(value);
+    }
+    this.sortBy = this.goodsService.getSortBy();
+    this.reverse = this.goodsService.getReverse();
+
+    const categoryId = this.route.snapshot.params.categoryId;
+    const subCategoryId = this.route.snapshot.params.subCategoryId;
+
+    this.lastItemIndex = 0;
+
+    if (subCategoryId) {
+      this.store.dispatch(
+        resetSubCategory({
+          categoryId: categoryId,
+          subCategoryId: subCategoryId,
+          fromIndex: this.lastItemIndex,
+        }),
+      );
+    } else {
+      this.store.dispatch(resetCategory({ categoryId: categoryId, fromIndex: this.lastItemIndex }));
+    }
   }
 }

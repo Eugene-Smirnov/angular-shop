@@ -1,0 +1,15 @@
+.upper-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sorting-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.sorting__direction {
+  position: relative;
+  left: -0.5rem;
+  font-size: 1.5rem;
+}

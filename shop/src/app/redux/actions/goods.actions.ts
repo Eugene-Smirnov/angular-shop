@@ -6,7 +6,11 @@ export const GOODS_ACTION_NAMES = {
   LOAD_SUBCATEGORY_GOODS: '[GOODS] Load subcategory goods',
   GOODS_LOADED: '[GOODS] Goods loaded successfully',
   ADD_PAGE: '[GOODS] Increment page counter',
+  ADD_CATEGORY_PAGE: '[GOODS] Increment category page counter',
+  ADD_SUBCATEGORY_PAGE: '[GOODS] Increment subcategory page counter',
   RESET: '[GOODS] Reset state',
+  RESET_CATEGORY: '[GOODS] Reset state and load category goods',
+  RESET_SUBCATEGORY: '[GOODS] Reset state and load subcategory goods',
 };
 
 export const loadCategoryGoods = createAction(
@@ -26,4 +30,24 @@ export const goodsLoadedSuccess = createAction(
 
 export const addPage = createAction(GOODS_ACTION_NAMES.ADD_PAGE);
 
+export const addCategoryPage = createAction(
+  GOODS_ACTION_NAMES.ADD_CATEGORY_PAGE,
+  props<{ categoryId: string; fromIndex: number }>(),
+);
+
+export const addSubCategoryPage = createAction(
+  GOODS_ACTION_NAMES.ADD_SUBCATEGORY_PAGE,
+  props<{ categoryId: string; subCategoryId: string; fromIndex: number }>(),
+);
+
 export const resetGoods = createAction(GOODS_ACTION_NAMES.RESET);
+
+export const resetCategory = createAction(
+  GOODS_ACTION_NAMES.RESET_CATEGORY,
+  props<{ categoryId: string; fromIndex: number }>(),
+);
+
+export const resetSubCategory = createAction(
+  GOODS_ACTION_NAMES.RESET_SUBCATEGORY,
+  props<{ categoryId: string; subCategoryId: string; fromIndex: number }>(),
+);

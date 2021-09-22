@@ -11,8 +11,6 @@ export const selectCategoryId = createSelector(selectGoodsState, (state) => stat
 
 export const selectSubCategoryId = createSelector(selectGoodsState, (state) => state.subCategoryId);
 
-export const selectLastItemIndex = createSelector(selectGoodsState, (state) => state.lastItemIndex);
-
 export const selectIsNotLastPage = createSelector(selectGoodsState, (state) => state.isNotLastPage);
 
 export const selectUserPipedGoods = createSelector(

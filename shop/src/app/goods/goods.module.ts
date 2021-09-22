@@ -20,6 +20,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { ItemDescriptionPageComponent } from './pages/item-description-page/item-description-page.component';
 import { CoreModule } from '../core/core.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     GoodsRoutingModule,
     StoreModule.forFeature(fromGoodsReducer.goodsFeatureKey, fromGoodsReducer.goodsReducer),
     EffectsModule.forFeature([LoadCategoryGoodsEffect, LoadSubCategoryGoodsEffect]),
+    MatIconModule,
     MatButtonModule,
     MatDividerModule,
     MatBadgeModule,

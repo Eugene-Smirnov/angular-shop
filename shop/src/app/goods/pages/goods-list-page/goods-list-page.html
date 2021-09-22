@@ -1,7 +1,22 @@
-<app-breadcrumbs
-  [breadcrumbs]="breadcrumbs"
-  (breadcrumbClick)="onLinkClick($event)"
-></app-breadcrumbs>
+<div class="upper-container">
+  <app-breadcrumbs
+    [breadcrumbs]="breadcrumbs"
+    (breadcrumbClick)="onLinkClick($event)"
+  ></app-breadcrumbs>
+  <div class="sorting-buttons">
+    <span>Сортировать по:</span>
+    <button mat-icon-button (click)="onSortByClick('price')">
+      <mat-icon> attach_money </mat-icon>
+    </button>
+    <span class="sorting__direction" *ngIf="sortBy === 'price' && !reverse ">🠗</span>
+    <span class="sorting__direction" *ngIf="sortBy === 'price' && reverse ">🠕</span>
+    <button mat-icon-button (click)="onSortByClick('rating')">
+      <mat-icon> star </mat-icon>
+    </button>
+    <span class="sorting__direction" *ngIf="sortBy === 'rating' && !reverse ">🠗</span>
+    <span class="sorting__direction" *ngIf="sortBy === 'rating' && reverse ">🠕</span>
+  </div>
+</div>
 <h2>{{ headingName }}</h2>
 <div class="card" *ngFor="let item of goods$ | async">
   <mat-divider></mat-divider>

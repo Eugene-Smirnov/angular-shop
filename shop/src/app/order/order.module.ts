@@ -20,7 +20,13 @@ import { SharedModule } from '../shared/shared.module';
 import { OrderDeleteDialogComponent } from './components/order-delete-dialog/order-delete-dialog.component';
 
 @NgModule({
-  declarations: [OrderPageComponent, OrderComponent, OrderItemComponent, OrderChangeFormComponent, OrderDeleteDialogComponent],
+  declarations: [
+    OrderPageComponent,
+    OrderComponent,
+    OrderItemComponent,
+    OrderChangeFormComponent,
+    OrderDeleteDialogComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,

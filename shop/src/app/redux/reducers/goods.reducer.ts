@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  addPage,
   goodsLoadedSuccess,
   loadCategoryGoods,
   loadSubCategoryGoods,
+  resetCategory,
   resetGoods,
+  resetSubCategory,
 } from '../actions/goods.actions';
 import { GoodsState } from '../models/state.models';
 
@@ -37,13 +38,7 @@ export const goodsReducer = createReducer(
       isNotLastPage: !!loadedGoods[10],
     };
   }),
-  on(addPage, (state): GoodsState => {
-    return {
-      ...state,
-      lastItemIndex: state.lastItemIndex + 10,
-    };
-  }),
-  on(resetGoods, (): GoodsState => {
+  on(resetGoods, resetCategory, resetSubCategory, (): GoodsState => {
     return {
       ...initialState,
     };
