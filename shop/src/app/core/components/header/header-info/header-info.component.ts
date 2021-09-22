@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./header-info.component.scss'],
 })
 export class HeaderInfoComponent {
-  @Input() location: string = 'Минск';
+  @Input() location: string = '';
 }

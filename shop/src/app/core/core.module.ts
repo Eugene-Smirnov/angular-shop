@@ -25,6 +25,9 @@ import { LoadCategoriesEffect } from '../redux/effects/categories.effects';
 import { HeaderSearchResultsComponent } from './components/header/header-search-results/header-search-results.component';
 import { LoginComponent } from './components/login/login.component';
 import { DialogAuthComponent } from './components/dialog-auth/dialog-auth.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { SliderComponent } from './components/slider/slider.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { DialogAuthComponent } from './components/dialog-auth/dialog-auth.compon
     HeaderSearchResultsComponent,
     LoginComponent,
     DialogAuthComponent,
+    MainPageComponent,
+    SliderComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +59,7 @@ import { DialogAuthComponent } from './components/dialog-auth/dialog-auth.compon
       fromCategoriesReducer.categoriesReducer,
     ),
     EffectsModule.forFeature([LoadCategoriesEffect]),
+    RouterModule,
   ],
   providers: [CategoryService],
   exports: [HeaderComponent, DialogAuthComponent],

@@ -2,8 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { CategoriesPageComponent } from './core/pages/categories-page/categories-page.component';
+import { MainPageComponent } from './core/pages/main-page/main-page.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: MainPageComponent,
+  },
   {
     path: 'categories',
     component: CategoriesPageComponent,

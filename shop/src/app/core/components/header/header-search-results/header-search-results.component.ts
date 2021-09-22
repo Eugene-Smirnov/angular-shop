@@ -49,11 +49,9 @@ export class HeaderSearchResultsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       window.addEventListener('click', this.listener, false);
     }, 100);
-    console.log('INIT');
   }
 
   ngOnDestroy() {
     window.removeEventListener('click', this.listener, false);
-    console.log('DESTROY');
   }
 }

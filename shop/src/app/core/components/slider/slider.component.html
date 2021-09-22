@@ -1,0 +1,31 @@
+<div class="slider__wrapper">
+  <button mat-fab class="slider__button_back" (click)="onBackClick()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <div class="slider" style="--item-counter: {{ currentPosition }}">
+    <div class="slider__rail">
+      <a
+        [routerLink]="'/goods/item/' + item.itemId"
+        *ngFor="let item of sliderItems"
+        class="slider__item"
+      >
+        <img [src]="item.imgUrl" />
+      </a>
+    </div>
+  </div>
+
+  <button mat-fab class="slider__button_forward" (click)="onForwardClick()">
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</div>
+<div class="slider-dots__wrapper">
+  <div class="slider-dots">
+    <button
+      class="slider-dots__circle"
+      *ngFor="let item of sliderItems; let i = index"
+      (click)="currentPosition = i"
+      [class.slider-dots__circle_active]="i === currentPosition"
+    ></button>
+  </div>
+</div>
