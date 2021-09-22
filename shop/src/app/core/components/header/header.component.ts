@@ -12,6 +12,7 @@ import { UserInfoModel } from 'src/app/user/models/user-info.model';
 import { loadUserInfo, logOut } from 'src/app/redux/actions/user.actions';
 import { Observable } from 'rxjs';
 import { selectUserInfo } from 'src/app/redux/selectors/user.selector';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,18 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private searchService: SearchService,
-  ) {}
+    private http: HttpClient,
+  ) {
+    this.http.get<{ ip: string }>('http://api.ipify.org/?format=json').subscribe(({ ip }) => {
+      this.http
+        .get<{ city: string; region: string; country: string }>(
+          `http://ipinfo.io/${ip}/?token=a42cd68cdc634f`,
+        )
+        .subscribe(({ city }) => (this.location = city));
+    });
+  }
+
+  location: string = 'Минск';
 
   userInfo$: Observable<UserInfoModel | null> = this.store.select(selectUserInfo);
 
