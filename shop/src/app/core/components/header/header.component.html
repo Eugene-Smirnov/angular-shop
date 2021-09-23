@@ -17,3 +17,5 @@
   (isClickOnComponent)="onIsClickOnSearchResults($event)"
   id="header-search-results"
 ></app-header-search-results>
+<app-header-categories [categories]="categories$ | async"></app-header-categories>
+<mat-divider></mat-divider>

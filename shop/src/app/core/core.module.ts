@@ -28,6 +28,7 @@ import { DialogAuthComponent } from './components/dialog-auth/dialog-auth.compon
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { RouterModule } from '@angular/router';
+import { HeaderCategoriesComponent } from './components/header/header-categories/header-categories.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RouterModule } from '@angular/router';
     DialogAuthComponent,
     MainPageComponent,
     SliderComponent,
+    HeaderCategoriesComponent,
   ],
   imports: [
     CommonModule,

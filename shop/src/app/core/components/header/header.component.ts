@@ -13,6 +13,7 @@ import { loadUserInfo, logOut } from 'src/app/redux/actions/user.actions';
 import { Observable } from 'rxjs';
 import { selectUserInfo } from 'src/app/redux/selectors/user.selector';
 import { HttpClient } from '@angular/common/http';
+import { selectCategories } from 'src/app/redux/selectors/categories.selectors';
 
 @Component({
   selector: 'app-header',
@@ -39,6 +40,8 @@ export class HeaderComponent implements OnInit {
   location: string = 'Минск';
 
   userInfo$: Observable<UserInfoModel | null> = this.store.select(selectUserInfo);
+
+  categories$: Observable<CategoryModel[]> = this.store.select(selectCategories);
 
   isSearchResultsOpened: boolean = false;
 
