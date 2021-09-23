@@ -1,0 +1,50 @@
+.header-info {
+  &__wrapper {
+    width: 90%;
+    margin: 0 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  display: flex;
+
+  &__location {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    align-items: center;
+    p,
+    button {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__more-contacts-item {
+    height: auto;
+    line-height: initial;
+    padding: 0.5rem 0.75rem;
+  }
+
+  &__working-hours,
+  &__watch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    h6 {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__watch {
+    margin-left: 0.5rem;
+  }
+}

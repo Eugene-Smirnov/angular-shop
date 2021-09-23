@@ -1,0 +1,55 @@
+<div class="item-card">
+  <img class="item-card__image" src="{{ item.imageUrls[0] }}" alt="{{ item.name }}" />
+  <div class="item-card__info">
+    <h3 class="item-card__heading" (click)="headingClick.emit(itemLink)">{{ item.name }}</h3>
+    <p
+      class="item-card__availible  {{ availableClass }}"
+      *ngIf="item.availableAmount; else notAvailable"
+    >
+      &#10004; В наличии
+    </p>
+    <ng-template #notAvailable>
+      <p class="item-card__availible  {{ availableClass }}">&#10007; Нет в наличии</p>
+    </ng-template>
+    <p class="item-card__price">Цена: {{ item.price }} р.</p>
+    <p class="item-card__rating">Рейтинг: {{ item.rating }}/5</p>
+    <div class="item-card__buttons">
+      <button
+        *ngIf="!item.isInCart"
+        mat-stroked-button
+        class="item-card__button item-card__button_to-cart"
+        color="primary"
+        (click)="toCartClick.emit(item.id)"
+      >
+        В корзину
+      </button>
+      <button
+        *ngIf="item.isInCart"
+        mat-stroked-button
+        class="item-card__button item-card__button_to-cart"
+        color="primary"
+        (click)="removeFromCartClick.emit(item.id)"
+      >
+        Убрать из корзины
+      </button>
+      <button
+        *ngIf="!item.isFavorite"
+        mat-button
+        class="item-card__button item-card__button_to-favorite"
+        color="accent"
+        (click)="favoriteClick.emit(item.id)"
+      >
+        В избранное
+      </button>
+      <button
+        *ngIf="item.isFavorite"
+        mat-button
+        class="item-card__button item-card__button_from-favorite"
+        color="accent"
+        (click)="removeFavoriteClick.emit(item.id)"
+      >
+        Убрать из избранного
+      </button>
+    </div>
+  </div>
+</div>

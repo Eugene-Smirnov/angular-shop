@@ -1,0 +1,62 @@
+<div class="header-nav__wrapper">
+  <h1 class="logo header-nav__logo" (click)="navigateClick.emit('')">XXIIvek.by</h1>
+  <button
+    class="header-nav__button"
+    mat-stroked-button
+    (click)="navigateClick.emit('/categories')"
+    routerLinkActive="active"
+  >
+    <mat-icon>view_list</mat-icon>
+    Каталог товаров
+  </button>
+  <div class="search-form-field__wrapper">
+    <mat-form-field class="search-form-field" appearance="outline">
+      <mat-label>{{ placeholder }}</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControl]="searchValue"
+        (focus)="searchInputChange.emit(searchValue.value)"
+      />
+      <button
+        *ngIf="searchValue.valueChanges | async"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="resetSearchValue()"
+      >
+        &#10006;
+      </button>
+    </mat-form-field>
+  </div>
+  <button class="header-nav__button" mat-stroked-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon> Аккаунт &#9660;
+  </button>
+  <mat-menu #menu xPosition="before">
+    <div class="user" *ngIf="!userInfo">
+      <div class="user-info">
+        <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
+        <button mat-raised-button color="primary" (click)="loginClick.emit()">Вход</button>
+      </div>
+    </div>
+
+    <div class="user user_logged" *ngIf="userInfo">
+      <div class="user-info">
+        <img src="../../../../assets/images/default-user.png" alt="default user avatar" />
+        <p>Здравствуйте,</p>
+        <p>{{ userInfo.firstName }} {{ userInfo.lastName }}!</p>
+        <button mat-raised-button color="primary" (click)="logoutClick.emit()">Выход</button>
+      </div>
+      <mat-divider class="user__divider"></mat-divider>
+      <button mat-menu-item (click)="navigateClick.emit('/favorites')">
+        <mat-icon>favorite</mat-icon> Избранное
+      </button>
+      <button mat-menu-item (click)="navigateClick.emit('/orders')">
+        <mat-icon>pending_actions</mat-icon> Лист ожидания
+      </button>
+    </div>
+  </mat-menu>
+  <button class="header-nav__button" mat-stroked-button (click)="navigateClick.emit('/cart')">
+    <mat-icon>shopping_cart</mat-icon> Корзина
+  </button>
+</div>

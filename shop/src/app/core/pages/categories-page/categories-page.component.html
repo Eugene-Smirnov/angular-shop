@@ -1,0 +1,34 @@
+<div class="categories-page__wrapper">
+  <div class="categories-list">
+    <mat-button-toggle-group [formControl]="activeCategoryControl" aria-label="Category" vertical>
+      <mat-button-toggle
+        *ngFor="let category of categories$ | async"
+        color="accent"
+        [value]="category.id"
+        #categoryButton
+        (mouseenter)="onCategoryHover(categoryButton.value)"
+        (click)="onCategoryClick(categoryButton.value)"
+      >
+        <div class="categories-list__item">
+          <mat-icon>{{ getCategoryIcon(category.id) }}</mat-icon>
+          <span>{{ category.name }}</span>
+        </div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <mat-divider vertical></mat-divider>
+  <div class="subcategories-list">
+    <a>
+      <h2 class="subcategories-list__heading" (click)="onCategoryClick(activeCategory?.id)">
+        {{ activeCategory?.name }}
+      </h2>
+    </a>
+    <div
+      *ngFor="let subCategory of subCategories"
+      class="subcategories-list__li"
+      (click)="onSubCategoryClick(subCategory.id)"
+    >
+      {{ subCategory?.name }}
+    </div>
+  </div>
+</div>

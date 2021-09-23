@@ -1,0 +1,33 @@
+.categories-page__wrapper {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.categories-list {
+  margin-right: 1rem;
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    span {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.subcategories-list {
+  margin-left: 1rem;
+
+  &__heading {
+    cursor: pointer;
+  }
+
+  &__li {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

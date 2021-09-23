@@ -1,0 +1,21 @@
+<app-header-info [location]="location"></app-header-info>
+<mat-divider></mat-divider>
+<app-header-navigation
+  (navigateClick)="onLinkClick([$event])"
+  (loginClick)="openLogin()"
+  (logoutClick)="onLogoutClick()"
+  (searchInputChange)="onSearchInputChange($event)"
+  [userInfo]="userInfo$ | async"
+></app-header-navigation>
+<mat-divider></mat-divider>
+<app-header-search-results
+  *ngIf="isSearchResultsOpened"
+  [categories]="searchCategories"
+  [subCategories]="searchSubCategories"
+  [goods]="searchGoods"
+  (linkClick)="onLinkClick($event)"
+  (isClickOnComponent)="onIsClickOnSearchResults($event)"
+  id="header-search-results"
+></app-header-search-results>
+<app-header-categories [categories]="categories$ | async"></app-header-categories>
+<mat-divider></mat-divider>

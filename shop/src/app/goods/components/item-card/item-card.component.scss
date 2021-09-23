@@ -1,0 +1,45 @@
+.item-card {
+  display: flex;
+  &__image {
+    max-width: 260px;
+    max-height: 200px;
+  }
+
+  &__info {
+    margin-left: 1rem;
+    width: 100%;
+  }
+
+  &__heading {
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__available {
+    &_20 {
+      color: rgb(56, 126, 56);
+    }
+    &_5 {
+      color: rgb(182, 171, 22);
+    }
+    &_1 {
+      color: rgb(182, 46, 22);
+    }
+    &_not {
+      color: rgb(100, 100, 100);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__button {
+    margin: 1rem;
+  }
+}

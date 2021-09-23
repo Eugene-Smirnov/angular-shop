@@ -1,0 +1,43 @@
+<div class="search-results__wrapper">
+  <h2 class="search-results__heading">Результаты поиска:</h2>
+  <div class="search-results__categories" *ngIf="categories[0]">
+    <h3 class="search-results__subheading">Категории:</h3>
+    <div class="search-results__category" *ngFor="let category of categories">
+      <h4 (click)="onLinkClick(getCategoryLink(category))">{{ category.name }}</h4>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+  <div class="search-results__subcategories" *ngIf="subCategories[0]">
+    <h3 class="search-results__subheading">Подкатегории:</h3>
+    <div class="search-results__subcategory" *ngFor="let subCategory of subCategories">
+      <h4 (click)="onLinkClick(getSubCategoryLink(subCategory))">{{ subCategory.name }}</h4>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+  <div class="search-results__goods" *ngIf="goods[0]">
+    <h3 class="search-results__subheading">Товары:</h3>
+    <div class="search-results-item" *ngFor="let item of goods">
+      <div class="search-results-item__image">
+        <img src="{{ item.imageUrls[0] }}" alt="" />
+      </div>
+      <div class="search-results-item__info">
+        <h4 class="search-results-item__name" (click)="onLinkClick(getGoodsLink(item))">
+          {{ item.name }}
+        </h4>
+        <div class="search-results-item__container">
+          <p class="search-results-item__price">{{ item.price }} р.</p>
+          <p class="search-results-item__availability" *ngIf="!!item.availableAmount">
+            Есть в наличии
+          </p>
+          <p class="search-results-item__availability_none" *ngIf="!item.availableAmount">
+            Нет в наличии
+          </p>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </div>
+  <div class="search-results__none" *ngIf="!categories[0] && !subCategories[0] && !goods[0]">
+    <h4 class="search-results__subheading">Ничего не найдено</h4>
+  </div>
+</div>

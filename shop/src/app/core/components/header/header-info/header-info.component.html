@@ -1,0 +1,41 @@
+<div class="header-info__wrapper">
+  <div class="header-info__location">
+    <mat-icon>location_on</mat-icon>
+    <p>{{ location }}</p>
+  </div>
+  <div class="header-info">
+    <div class="header-info__contacts mat-body-1">
+      <p>Viber</p>
+      <p>A1 +375(09)8765432</p>
+      <button mat-button [matMenuTriggerFor]="menu">Ещё &#9660;</button>
+      <mat-menu #menu xPosition="before">
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>call</mat-icon> +375(08)7654321 ( life:) )
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>call</mat-icon> +375(08)7654321 ( A1 )
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>telegram</mat-icon> Telegram
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>mail</mat-icon> Почта
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>perm_phone_msg</mat-icon> Заказать звонок
+        </button>
+        <button mat-menu-item class="header-info__more-contacts-item">
+          <mat-icon>message</mat-icon> Написать нам
+        </button>
+      </mat-menu>
+    </div>
+    <mat-divider vertical></mat-divider>
+    <div class="header-info__watch mat-hint">
+      <mat-icon>watch_later</mat-icon>
+    </div>
+    <div class="header-info__working-hours">
+      <h6 class="mat-hint">контакт-центр</h6>
+      <h6 class="mat-hint">с 8:00 до 22:00</h6>
+    </div>
+  </div>
+</div>

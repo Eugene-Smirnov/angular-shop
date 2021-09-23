@@ -1,0 +1,35 @@
+<div class="cart-item-card" *ngIf="item">
+  <div class="cart-item-card__image">
+    <img src="{{ item.imageUrls[0] }}" alt="{{ item.name }}" />
+  </div>
+  <div class="cart-item-card__info-wrapper">
+    <h3 class="cart-item-card__heading" (click)="headingClick.emit(itemLink)">{{ item.name }}</h3>
+    <div class="cart-item-card__info">
+      <div class="cart-item-card__text">
+        <p class="cart-item-card__price">Цена: {{ item.price }} р.</p>
+        <div class="cart-item-card__rating">
+          <mat-icon *ngFor="let star of ratingToStars(item.rating)">star</mat-icon>
+        </div>
+      </div>
+      <div class="cart-item__total">
+        <button
+          mat-icon-button
+          (click)="incrementClick.emit(item.id)"
+          [disabled]="item.amount >= item.availableAmount"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="decrementClick.emit(item.id)"
+          [disabled]="item.amount <= 1"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+        <p class="cart-item-card__price">
+          Итого: {{ item.price }} р. х {{ item.amount }} = {{ item.getTotalPrice() }} р.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

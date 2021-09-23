@@ -1,0 +1,43 @@
+<div class="order">
+  <div class="order__heading">
+    <h3>
+      Заказ <b>#{{ order.id.toUpperCase() }}</b>
+    </h3>
+    <div class="order__buttons">
+      <button mat-mini-fab color="primary" *ngIf="!edit" (click)="edit = true">
+        <mat-icon> edit_note </mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" *ngIf="edit" (click)="edit = false">
+        <mat-icon> edit_off </mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" (click)="orderDelete.emit(order.id)">
+        <mat-icon> delete </mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="order__details">
+    <ul *ngIf="!edit">
+      <li>ФИО: {{ order.details.name }}</li>
+      <li>Адрес доставки: {{ order.details.address }}</li>
+      <li>Контактный телефон: {{ order.details.phone }}</li>
+      <li>Дата доставки: {{ order.details.timeToDeliver | date: 'dd.MM.y' }}</li>
+      <li>Ориентировочное время доставки: {{ order.details.timeToDeliver | date: 'HH:mm' }}</li>
+      <li>Комментарий: {{ order.details.comment }}</li>
+    </ul>
+    <app-order-change-form
+      *ngIf="edit"
+      [details]="order.details"
+      (closeForm)="edit = false"
+      (formSubmit)="onFormSubmit($event)"
+    ></app-order-change-form>
+  </div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Список товаров </mat-panel-title>
+      <mat-panel-description>
+        <span>Сумма заказа: {{ getOrderPrice() }} р.</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-order-item *ngFor="let item of items" [item]="item"></app-order-item>
+  </mat-expansion-panel>
+</div>

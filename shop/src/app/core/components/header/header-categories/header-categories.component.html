@@ -1,0 +1,12 @@
+<div class="header-categories__wrapper">
+  <div class="header-categories" *ngIf="categories">
+    <button
+      mat-button
+      *ngFor="let category of categories"
+      [routerLink]="'/goods/' + category.id"
+      routerLinkActive="header-categories__button_active"
+    >
+      {{ category.name }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<h2>Корзина</h2>
+<div class="cart__order-form" *ngIf="cart[0]">
+  <div class="cart__items-wrapper">
+    <app-cart-item
+      *ngFor="let item of cart"
+      [item]="item"
+      (headingClick)="onLinkClick($event)"
+      (incrementClick)="incrementItem($event)"
+      (decrementClick)="decrementItem($event)"
+    ></app-cart-item>
+  </div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Детали заказа </mat-panel-title>
+      <mat-panel-description>
+        <span>Сумма заказа: {{ getTotalPrice() }} р.</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-cart-form (formSubmit)="onFormSubmit($event)"></app-cart-form>
+  </mat-expansion-panel>
+</div>
+<div class="cart_empty" *ngIf="!cart[0]">
+  <h3>Корзина пуста!</h3>
+</div>

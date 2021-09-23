@@ -1,0 +1,9 @@
+<div class="breadcrumbs mat-caption">
+  <div class="breadcrumb__wrapper">
+    <p class="breadcrumb" (click)="breadcrumbClick.emit('/')">Главная</p>
+  </div>
+  <div class="breadcrumb__wrapper" *ngFor="let breadcrumb of breadcrumbs">
+    <p>&#10095;</p>
+    <p class="breadcrumb" (click)="breadcrumbClick.emit(breadcrumb.path)">{{ breadcrumb.name }}</p>
+  </div>
+</div>
