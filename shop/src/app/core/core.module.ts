@@ -29,6 +29,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { RouterModule } from '@angular/router';
 import { HeaderCategoriesComponent } from './components/header/header-categories/header-categories.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { HeaderCategoriesComponent } from './components/header/header-categories
     MainPageComponent,
     SliderComponent,
     HeaderCategoriesComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,6 @@ import { HeaderCategoriesComponent } from './components/header/header-categories
     RouterModule,
   ],
   providers: [CategoryService],
-  exports: [HeaderComponent, DialogAuthComponent],
+  exports: [HeaderComponent, DialogAuthComponent, FooterComponent],
 })
 export class CoreModule {}

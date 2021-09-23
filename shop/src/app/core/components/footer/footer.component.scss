@@ -1,0 +1,31 @@
+.footer {
+  height: 6rem;
+  width: 100%;
+
+  &__contacts {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5%;
+
+    &-item {
+      width: fit-content;
+      color: lightgrey;
+      font-size: 14px;
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link-button {
+    background-color: white;
+    margin: 0.5rem;
+    img {
+      max-width: 50%;
+      max-height: 50%;
+    }
+  }
+}
